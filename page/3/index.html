@@ -150,6 +150,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-four" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/12/four/">Android 的权限 UID,GID,PID 简介</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/12/four/" class="archive-article-date">
+  	<time datetime="2017-10-12T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="UID分类"><a href="#UID分类" class="headerlink" title="UID分类"></a>UID分类</h3><p>根用户：root账户， 属于UID，默认编号0<br>系统用户，属于UID，一般是系统保留编号，1~499<br>普通用户，属于UID，默认编号从500开始</p>
+<h3 id="PID，UID，GID关系"><a href="#PID，UID，GID关系" class="headerlink" title="PID，UID，GID关系"></a>PID，UID，GID关系</h3><p>真实用户、组 (uid,gid)<br>有效的用户、组 (euid,egid)<br>文件系统、组 (fsuid,fsgid)<br>保存的设置用户、组 (suid,sgid)</p>
+<h3 id="Android-应用程序上的ID"><a href="#Android-应用程序上的ID" class="headerlink" title="Android 应用程序上的ID"></a>Android 应用程序上的ID</h3><p>Android 应用程序运行在他们自己的Linux进程上，并被分配唯一的用户ID。在manifest中使用android:sharedUserId可以让不同的app运行在同一个的ID中，从而共享数据和代码<br>在android APP中，UID = GID.是由框架在app安装过程中生成，与app申请的权限有关</p>
+<h3 id="Android-AID"><a href="#Android-AID" class="headerlink" title="Android AID"></a>Android AID</h3><p>Android定义了一套权限数值AID，源码如下</p>
+<p><a target="_blank" rel="noopener" href="http://androidxref.com/7.1.1_r6/xref/system/core/include/private/android_filesystem_config.h">http://androidxref.com/7.1.1_r6/xref/system/core/include/private/android_filesystem_config.h</a></p>
+<p>3000+开始，定义为辅助组,这些GIDS在APP需要权限的时候会加入到该APP中，因此APP会具有这些GIDS.<br>APP的AID从10000开始，AID_USER代表每个用户的offset(1000000)。第n个用户安装的第m个apk的UID = n*AID_USER+10000+m。</p>
+<p><a target="_blank" rel="noopener" href="http://androidxref.com/7.1.1_r6/xref/bionic/libc/bionic/stubs.cpp">http://androidxref.com/7.1.1_r6/xref/bionic/libc/bionic/stubs.cpp</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/12/four/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-two" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
