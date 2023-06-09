@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>running Django | fcs cave</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="跑起来了！    介绍作为统治python web世界的框架之一，django拥有众多的优点，虽然因为python的性能不佳在大型网站里面可能用的不多，但对于需要快速开发部署的服务来说，django框架提供的前后端分离模型，有些类似于grails那样的傻瓜式开发方式，是非常合适的。部署这个东西第一次弄还是有点麻烦，但完成后编码的爽快感，项目的清晰程度，都超出了我对它的期望。 安装与部署使用ana">
+  <meta name="description" content="跑起来了！    介绍作为统治python web世界的框架之一，django拥有众多的优点，虽然因为python的性能不佳在大型网站里面可能用的不多，但对于需要快速开发部署的服务来说，django框架提供的前后端分离模型，有些类似于grails那样的傻瓜式开发方式，是非常合适的。部署这个东西第一次弄还是有点麻烦，但完成后编码的爽快感，项目的清晰程度，都超出了我对它的期望。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="running Django">
 <meta property="og:url" content="http://example.com/2017/12/04/seven/index.html">
 <meta property="og:site_name" content="fcs cave">
-<meta property="og:description" content="跑起来了！    介绍作为统治python web世界的框架之一，django拥有众多的优点，虽然因为python的性能不佳在大型网站里面可能用的不多，但对于需要快速开发部署的服务来说，django框架提供的前后端分离模型，有些类似于grails那样的傻瓜式开发方式，是非常合适的。部署这个东西第一次弄还是有点麻烦，但完成后编码的爽快感，项目的清晰程度，都超出了我对它的期望。 安装与部署使用ana">
+<meta property="og:description" content="跑起来了！    介绍作为统治python web世界的框架之一，django拥有众多的优点，虽然因为python的性能不佳在大型网站里面可能用的不多，但对于需要快速开发部署的服务来说，django框架提供的前后端分离模型，有些类似于grails那样的傻瓜式开发方式，是非常合适的。部署这个东西第一次弄还是有点麻烦，但完成后编码的爽快感，项目的清晰程度，都超出了我对它的期望。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2017/12/04/images/old/seven_1.png">
 <meta property="article:published_time" content="2017-12-04T15:37:10.000Z">
-<meta property="article:modified_time" content="2023-06-08T06:39:49.022Z">
+<meta property="article:modified_time" content="2023-06-09T03:35:55.681Z">
 <meta property="article:author" content="fcrab">
 <meta property="article:tag" content="dev">
 <meta name="twitter:card" content="summary">
@@ -67,6 +67,8 @@
 				<li><a href="/tags/toys/">玩物</a></li>
 	        
 				<li><a href="/tags/note/">日记</a></li>
+	        
+				<li><a href="/tags/ai/">赛博咏唱</a></li>
 	        
 			</ul>
 		</nav>
@@ -120,6 +122,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -134,13 +138,15 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 25%"><a href="/">主页</a></li>
+					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/dev/">开发</a></li>
+					<li style="width: 20%"><a href="/tags/dev/">开发</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/toys/">玩物</a></li>
+					<li style="width: 20%"><a href="/tags/toys/">玩物</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/note/">日记</a></li>
+					<li style="width: 20%"><a href="/tags/note/">日记</a></li>
+		        
+					<li style="width: 20%"><a href="/tags/ai/">赛博咏唱</a></li>
 		        
 				</ul>
 			</nav>
@@ -180,7 +186,7 @@
 </ul>
 <p><img src="../images/old/seven_1.png" alt="seven_1"></p>
 <ul>
-<li>介绍<br>作为统治python web世界的框架之一，django拥有众多的优点，虽然因为python的性能不佳在大型网站里面可能用的不多，但对于需要快速开发部署的服务来说，django框架提供的前后端分离模型，有些类似于grails那样的傻瓜式开发方式，是非常合适的。<br>部署这个东西第一次弄还是有点麻烦，但完成后编码的爽快感，项目的清晰程度，都超出了我对它的期望。</li>
+<li>介绍<br>作为统治python web世界的框架之一，django拥有众多的优点，虽然因为python的性能不佳在大型网站里面可能用的不多，但对于需要快速开发部署的服务来说，django框架提供的前后端分离模型，有些类似于grails那样的傻瓜式开发方式，是非常合适的。<br>部署这个东西第一次弄还是有点麻烦，但完成后编码的爽快感，项目的清晰程度，都超出了我对它的期望。<a id="more"></a></li>
 <li>安装与部署<br>使用anaconda安装python 3.5。 切换到python3.5环境。<br>这里写的是按照官方的教程来，默认环境从来没安装过django，并默认已经安装pip<br><code>pip install Django</code><br>for ubuntu: <code>sudo apt-get install python-django -y</code><br>for fedora: <code>yum install python-django</code><br>安装后会发现当前目录下有一个Django的目录。<br>测试Django是否安装成功:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import django</span><br><span class="line">&gt;&gt;&gt;django.VERSION</span><br><span class="line">(2, 1, 0, &#39;alpha&#39;, 0)</span><br><span class="line">&gt;&gt;&gt;django.get_version()</span><br><span class="line">&#39;2.1.dev20171123182639&#39;</span><br></pre></td></tr></table></figure>
 进入之后新建一个project :<br><code>django-admin.py startproject xpro_test</code><br>再新建一个app<br><code>python mange.py startapp webx</code><br>那么目前的项目结构就成了这样：</li>
 </ul>
@@ -421,6 +427,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">toys</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ai</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">note</a>
               </li>
             
             <div class="clearfix"></div>

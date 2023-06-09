@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>用openCV在Android上实现图片模糊检测 | fcs cave</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="效果实现方式较为简单，拍照后点击按钮进行检测，下方文本框显示检查结果   实现基于openCV for Android 3.2版本的SDK，主要方法是将图像进行灰度化，再利用拉普拉斯算子进行3层的计算，之后是均值和方差计算。越清晰的图片，方差越大。因此，选定方差的标准，就可以判定图片是清晰还是模糊了。 由于Laplacian算子已经在OpenCV中被良好封装，因此无论是使用python，Java和">
+  <meta name="description" content="效果实现方式较为简单，拍照后点击按钮进行检测，下方文本框显示检查结果">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用openCV在Android上实现图片模糊检测">
 <meta property="og:url" content="http://example.com/2017/10/24/five/index.html">
 <meta property="og:site_name" content="fcs cave">
-<meta property="og:description" content="效果实现方式较为简单，拍照后点击按钮进行检测，下方文本框显示检查结果   实现基于openCV for Android 3.2版本的SDK，主要方法是将图像进行灰度化，再利用拉普拉斯算子进行3层的计算，之后是均值和方差计算。越清晰的图片，方差越大。因此，选定方差的标准，就可以判定图片是清晰还是模糊了。 由于Laplacian算子已经在OpenCV中被良好封装，因此无论是使用python，Java和">
+<meta property="og:description" content="效果实现方式较为简单，拍照后点击按钮进行检测，下方文本框显示检查结果">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2017/10/24/images/old/five_1.png">
 <meta property="og:image" content="http://example.com/2017/10/24/images/old/five_2.png">
 <meta property="article:published_time" content="2017-10-24T15:37:10.000Z">
-<meta property="article:modified_time" content="2023-06-08T06:39:49.022Z">
+<meta property="article:modified_time" content="2023-06-09T06:10:03.433Z">
 <meta property="article:author" content="fcrab">
 <meta property="article:tag" content="dev">
 <meta name="twitter:card" content="summary">
@@ -68,6 +68,8 @@
 				<li><a href="/tags/toys/">玩物</a></li>
 	        
 				<li><a href="/tags/note/">日记</a></li>
+	        
+				<li><a href="/tags/ai/">赛博咏唱</a></li>
 	        
 			</ul>
 		</nav>
@@ -121,6 +123,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -135,13 +139,15 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 25%"><a href="/">主页</a></li>
+					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/dev/">开发</a></li>
+					<li style="width: 20%"><a href="/tags/dev/">开发</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/toys/">玩物</a></li>
+					<li style="width: 20%"><a href="/tags/toys/">玩物</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/note/">日记</a></li>
+					<li style="width: 20%"><a href="/tags/note/">日记</a></li>
+		        
+					<li style="width: 20%"><a href="/tags/ai/">赛博咏唱</a></li>
 		        
 				</ul>
 			</nav>
@@ -179,6 +185,7 @@
         <h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>实现方式较为简单，拍照后点击按钮进行检测，下方文本框显示检查结果</p>
 <p><img src="../images/old/five_1.png" alt="1"></p>
 <p><img src="../images/old/five_2.png" alt="2"></p>
+<a id="more"></a>
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>基于openCV for Android 3.2版本的SDK，主要方法是将图像进行灰度化，再利用拉普拉斯算子进行3层的计算，之后是均值和方差计算。越清晰的图片，方差越大。因此，选定方差的标准，就可以判定图片是清晰还是模糊了。</p>
 <p>由于Laplacian算子已经在OpenCV中被良好封装，因此无论是使用python，Java和C++ 都可以很好地完成这一工作。而由于使用java的SDK需要安装独立的openCV 管理器，因此我选择了C++的实现方法。并且将C++库直接导入Android工程中。</p>
 <p>由于核心算法方面都是参考各位大牛的实现所得，这里就不放代码了，献上参考链接：</p>
@@ -407,6 +414,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">toys</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ai</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">note</a>
               </li>
             
             <div class="clearfix"></div>

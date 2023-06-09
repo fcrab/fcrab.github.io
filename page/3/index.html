@@ -61,6 +61,8 @@
 	        
 				<li><a href="/tags/note/">日记</a></li>
 	        
+				<li><a href="/tags/ai/">赛博咏唱</a></li>
+	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -113,6 +115,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -127,13 +131,15 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 25%"><a href="/">主页</a></li>
+					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/dev/">开发</a></li>
+					<li style="width: 20%"><a href="/tags/dev/">开发</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/toys/">玩物</a></li>
+					<li style="width: 20%"><a href="/tags/toys/">玩物</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/note/">日记</a></li>
+					<li style="width: 20%"><a href="/tags/note/">日记</a></li>
+		        
+					<li style="width: 20%"><a href="/tags/ai/">赛博咏唱</a></li>
 		        
 				</ul>
 			</nav>
@@ -149,6 +155,159 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-six" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/04/six/">JVM 理解</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/04/six/" class="archive-article-date">
+  	<time datetime="2017-11-04T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="自动内存管理"><a href="#自动内存管理" class="headerlink" title="自动内存管理"></a>自动内存管理</h3><h4 id="内存区域"><a href="#内存区域" class="headerlink" title="内存区域"></a>内存区域</h4><ul>
+<li><p>程序计数器 Program Counter Register<br>执行Java方法，记录当前指令的地址。执行natvie方法，为空</p>
+        
+          <a class="article-more-a" href="/2017/11/04/six/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/04/six/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-four_2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/24/four_2/">图像相关处理</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/24/four_2/" class="archive-article-date">
+  	<time datetime="2017-10-24T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="图像灰度化"><a href="#图像灰度化" class="headerlink" title="图像灰度化"></a>图像灰度化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public Bitmap bitmap2Gray(Bitmap bitmap)&#123;</span><br><span class="line">  int width &#x3D; bitmap.getWidth();</span><br><span class="line">  int height &#x3D; bitmap.getHeight();</span><br><span class="line">  &#x2F;&#x2F;目标灰度图片</span><br><span class="line">  Bitmap bmpGray &#x3D; Bitmap.createBitmap(width,height,Bitmap.Config.RGB_565);</span><br><span class="line">  Canvas canvas &#x3D; new Canvas(bmpGray);</span><br><span class="line">  Paint paint &#x3D; new Paint();</span><br><span class="line">  ColorMatrix cm &#x3D; new ColorMatrix();</span><br><span class="line">  cm.setSaturation(0);</span><br><span class="line">  ColorMatrixColorFilter f &#x3D; new ColorMatrixColorFilter(cm);</span><br><span class="line">  paint.setColorFilter(f);</span><br><span class="line">  canvas.drawBitmap(bitmap,0,0,paint);</span><br><span class="line">  return bmpGray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/10/24/four_2/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/24/four_2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-five" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -173,11 +332,9 @@
         <h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>实现方式较为简单，拍照后点击按钮进行检测，下方文本框显示检查结果</p>
 <p><img src="../images/old/five_1.png" alt="1"></p>
 <p><img src="../images/old/five_2.png" alt="2"></p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>基于openCV for Android 3.2版本的SDK，主要方法是将图像进行灰度化，再利用拉普拉斯算子进行3层的计算，之后是均值和方差计算。越清晰的图片，方差越大。因此，选定方差的标准，就可以判定图片是清晰还是模糊了。</p>
-<p>由于Laplacian算子已经在OpenCV中被良好封装，因此无论是使用python，Java和C++ 都可以很好地完成这一工作。而由于使用java的SDK需要安装独立的openCV 管理器，因此我选择了C++的实现方法。并且将C++库直接导入Android工程中。</p>
-<p>由于核心算法方面都是参考各位大牛的实现所得，这里就不放代码了，献上参考链接：</p>
-<p>c++版的调用实现: <a target="_blank" rel="noopener" href="http://blog.csdn.net/qq_34784753/article/details/72901616">http://blog.csdn.net/qq_34784753/article/details/72901616</a><br>python版的解释与实现 <a target="_blank" rel="noopener" href="https://www.google.com/search?q=Laplacian+c+++%E6%A8%A1%E7%B3%8A%E6%A3%80%E6%B5%8B&amp;oq=Laplacian&amp;aqs=chrome.3.69i57j69i61j69i60j69i59l2j69i60.11904j0j4&amp;sourceid=chrome&amp;ie=UTF-8">https://www.google.com/search?q=Laplacian+c%2B%2B+%E6%A8%A1%E7%B3%8A%E6%A3%80%E6%B5%8B&amp;oq=Laplacian&amp;aqs=chrome.3.69i57j69i61j69i60j69i59l2j69i60.11904j0j4&amp;sourceid=chrome&amp;ie=UTF-8</a></p>
-
+        
+          <a class="article-more-a" href="/2017/10/24/five/#more">more >></a>
+        
       
 
       
@@ -251,13 +408,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="UID分类"><a href="#UID分类" class="headerlink" title="UID分类"></a>UID分类</h3><p>根用户：root账户， 属于UID，默认编号0<br>系统用户，属于UID，一般是系统保留编号，1~499<br>普通用户，属于UID，默认编号从500开始</p>
-<h3 id="PID，UID，GID关系"><a href="#PID，UID，GID关系" class="headerlink" title="PID，UID，GID关系"></a>PID，UID，GID关系</h3><p>真实用户、组 (uid,gid)<br>有效的用户、组 (euid,egid)<br>文件系统、组 (fsuid,fsgid)<br>保存的设置用户、组 (suid,sgid)</p>
-<h3 id="Android-应用程序上的ID"><a href="#Android-应用程序上的ID" class="headerlink" title="Android 应用程序上的ID"></a>Android 应用程序上的ID</h3><p>Android 应用程序运行在他们自己的Linux进程上，并被分配唯一的用户ID。在manifest中使用android:sharedUserId可以让不同的app运行在同一个的ID中，从而共享数据和代码<br>在android APP中，UID = GID.是由框架在app安装过程中生成，与app申请的权限有关</p>
-<h3 id="Android-AID"><a href="#Android-AID" class="headerlink" title="Android AID"></a>Android AID</h3><p>Android定义了一套权限数值AID，源码如下</p>
-<p><a target="_blank" rel="noopener" href="http://androidxref.com/7.1.1_r6/xref/system/core/include/private/android_filesystem_config.h">http://androidxref.com/7.1.1_r6/xref/system/core/include/private/android_filesystem_config.h</a></p>
-<p>3000+开始，定义为辅助组,这些GIDS在APP需要权限的时候会加入到该APP中，因此APP会具有这些GIDS.<br>APP的AID从10000开始，AID_USER代表每个用户的offset(1000000)。第n个用户安装的第m个apk的UID = n*AID_USER+10000+m。</p>
-<p><a target="_blank" rel="noopener" href="http://androidxref.com/7.1.1_r6/xref/bionic/libc/bionic/stubs.cpp">http://androidxref.com/7.1.1_r6/xref/bionic/libc/bionic/stubs.cpp</a></p>
-
+        
+          <a class="article-more-a" href="/2017/10/12/four/#more">more >></a>
+        
       
 
       
@@ -602,6 +755,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">toys</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ai</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">note</a>
               </li>
             
             <div class="clearfix"></div>

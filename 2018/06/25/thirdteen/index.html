@@ -16,7 +16,7 @@
 <meta property="og:description" content="Parent Delegation Model(双亲委托模型)1234&#x2F;&#x2F;classloader构造方法,子classloader持有父classloaderprotected ClassLoader(ClassLoader parent)&amp;#123;  this(checkCreateClassLoader(),parent);&amp;#125; classloader对class">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-06-25T15:37:10.000Z">
-<meta property="article:modified_time" content="2023-06-08T06:39:49.023Z">
+<meta property="article:modified_time" content="2023-06-09T03:34:41.611Z">
 <meta property="article:author" content="fcrab">
 <meta property="article:tag" content="dev">
 <meta name="twitter:card" content="summary">
@@ -65,6 +65,8 @@
 				<li><a href="/tags/toys/">玩物</a></li>
 	        
 				<li><a href="/tags/note/">日记</a></li>
+	        
+				<li><a href="/tags/ai/">赛博咏唱</a></li>
 	        
 			</ul>
 		</nav>
@@ -118,6 +120,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -132,13 +136,15 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 25%"><a href="/">主页</a></li>
+					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/dev/">开发</a></li>
+					<li style="width: 20%"><a href="/tags/dev/">开发</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/toys/">玩物</a></li>
+					<li style="width: 20%"><a href="/tags/toys/">玩物</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/note/">日记</a></li>
+					<li style="width: 20%"><a href="/tags/note/">日记</a></li>
+		        
+					<li style="width: 20%"><a href="/tags/ai/">赛博咏唱</a></li>
 		        
 				</ul>
 			</nav>
@@ -175,6 +181,7 @@
       
         <h3 id="Parent-Delegation-Model-双亲委托模型"><a href="#Parent-Delegation-Model-双亲委托模型" class="headerlink" title="Parent Delegation Model(双亲委托模型)"></a>Parent Delegation Model(双亲委托模型)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;classloader构造方法,子classloader持有父classloader</span><br><span class="line">protected ClassLoader(ClassLoader parent)&#123;</span><br><span class="line">  this(checkCreateClassLoader(),parent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>classloader对class的加载过程:</p>
+<a id="more"></a>
 <ol>
 <li>源 ClassLoader 先判断该 Class 是否已加载，如果已加载，则直接返回 Class，如果没有则委托给父类加载器。</li>
 <li>父类加载器判断是否加载过该 Class，如果已加载，则直接返回 Class，如果没有则委托给祖父类加载器。</li>
@@ -428,6 +435,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">toys</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ai</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">note</a>
               </li>
             
             <div class="clearfix"></div>
