@@ -57,11 +57,13 @@
 	        
 				<li><a href="/tags/dev/">开发</a></li>
 	        
+				<li><a href="/tags/ee/">EE</a></li>
+	        
+				<li><a href="/tags/ai/">赛博咏唱</a></li>
+	        
 				<li><a href="/tags/toys/">玩物</a></li>
 	        
 				<li><a href="/tags/note/">日记</a></li>
-	        
-				<li><a href="/tags/ai/">赛博咏唱</a></li>
 	        
 			</ul>
 		</nav>
@@ -117,6 +119,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -131,15 +135,17 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 20%"><a href="/">主页</a></li>
+					<li style="width: 16.666666666666668%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/dev/">开发</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/dev/">开发</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/toys/">玩物</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/ee/">EE</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/note/">日记</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/ai/">赛博咏唱</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/ai/">赛博咏唱</a></li>
+					<li style="width: 16.666666666666668%"><a href="/tags/toys/">玩物</a></li>
+		        
+					<li style="width: 16.666666666666668%"><a href="/tags/note/">日记</a></li>
 		        
 				</ul>
 			</nav>
@@ -155,6 +161,308 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-android_1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/26/android_1/">Flutter 与原生交互（以Android为例）</a>
+    </h1>
+  
+
+        
+        <a href="/2023/06/26/android_1/" class="archive-article-date">
+  	<time datetime="2023-06-26T07:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>Flutter</code> 和移动端的原生代码交互主要是依赖<code>MethodChannel</code>实现.通过在其中一边定义<code>CallHandler</code>,另一边调用<code>invokeMethod</code>可以实现代码的相互调用，并获得结果</p>
+<p>以下为一个简单的例子:<br>我们新增两组channel，msgbox用于原生调用flutter代码，device用于flutter调用原生代码，需要注意的是这里的调用都是可以通过回调获取返回值的(使用<code>result.success</code>或<code>result.error</code>)，这里展示的用法是为了展示互相调用的可能性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line">    原生android代码</span><br><span class="line"> *&#x2F;</span><br><span class="line">class MainActivity: FlutterActivity() &#123;</span><br><span class="line">    &#x2F;&#x2F;原生调用flutter的通道</span><br><span class="line">    private val channelTag &#x3D; &quot;com.united.io&#x2F;msgbox&quot;</span><br><span class="line">    &#x2F;&#x2F;flutter调用原生的通道</span><br><span class="line">    private val originTag &#x3D; &quot;com.united.io&#x2F;device&quot;</span><br><span class="line"></span><br><span class="line">    override fun configureFlutterEngine(flutterEngine: FlutterEngine) &#123;</span><br><span class="line">        super.configureFlutterEngine(flutterEngine)</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;注册被flutter调用的函数,一个通道可以包含多个函数,通过call.method区分</span><br><span class="line">        val channel &#x3D; </span><br><span class="line">            MethodChannel(flutterEngine.dartExecutor.binaryMessenger,originTag)</span><br><span class="line">        channel.setMethodCallHandler &#123; call, result -&gt;</span><br><span class="line">            when(call.method)&#123;</span><br><span class="line">                &quot;refresh&quot;-&gt;&#123;</span><br><span class="line">                    Log.d(&quot;Main&quot;,&quot;call by refresh&quot;)</span><br><span class="line">                    callByChannel()</span><br><span class="line">                    result.success(true)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private fun callByChannel()&#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;调用flutter函数</span><br><span class="line">        flutterEngine?.dartExecutor?.let &#123;</span><br><span class="line">            val callbackChannel  &#x3D; MethodChannel(it.binaryMessenger,channelTag)</span><br><span class="line">            callbackChannel.invokeMethod(&quot;refreshMsg&quot;,true)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line">    flutter代码</span><br><span class="line"> *&#x2F;</span><br><span class="line">class _Page2 extends State&lt;Page2&gt;&#123;</span><br><span class="line">  var counter &#x3D; 0;</span><br><span class="line"></span><br><span class="line">  _Page2()&#123;</span><br><span class="line">    &#x2F;&#x2F;定义flutter对msgbox通道的函数定义，这里对原生调用直接转入alertToRefresh函数，并没有做method的细分</span><br><span class="line">    MethodChannel page2BoxChannel &#x3D; MethodChannel(&quot;com.xuanwu.ipush.io&#x2F;msgbox&quot;);</span><br><span class="line">    page2BoxChannel.setMethodCallHandler((call) &#x3D;&gt; alertToRefresh(call));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Future&lt;dynamic&gt; alertToRefresh(MethodCall call)async&#123;</span><br><span class="line">    print(&quot;call by refresh in page2&quot;);</span><br><span class="line">    &#x2F;&#x2F;当被调用时,counter+2，并且刷新界面</span><br><span class="line">    setState(() &#123;</span><br><span class="line">      counter+&#x3D;2;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @override</span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    return Scaffold(</span><br><span class="line">      &#x2F;&#x2F; extendBodyBehindAppBar: true,</span><br><span class="line">      appBar: AppBar(</span><br><span class="line">        title: Text(&quot;Page2&quot;),</span><br><span class="line">        centerTitle: true,</span><br><span class="line">      ),</span><br><span class="line">      body: Center(</span><br><span class="line">        child: Column(</span><br><span class="line">          mainAxisAlignment: MainAxisAlignment.center,</span><br><span class="line">          children: &lt;Widget&gt;[</span><br><span class="line">            const Text(</span><br><span class="line">              &#39;final page 2&#39;,</span><br><span class="line">            ),</span><br><span class="line">            Text(</span><br><span class="line">              &#39;$counter&#39;,</span><br><span class="line">              style: Theme.of(context).textTheme.headline4,</span><br><span class="line">            ),</span><br><span class="line">            TextButton(onPressed: ()&#123;</span><br><span class="line">                &#x2F;&#x2F;通过点击调用原生device的refresh方法.</span><br><span class="line">                &#x2F;&#x2F;通道定义:</span><br><span class="line">                &#x2F;&#x2F;static const originChannel &#x3D; const MethodChannel(&quot;com.xuanwu.ipush.io&#x2F;device&quot;)</span><br><span class="line">              ExamGlobal.originChannel.invokeMethod(&quot;refresh&quot;);</span><br><span class="line">            &#125;, child: Text(&quot;add_2&quot;))</span><br><span class="line">          ],</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>注意:<br>我们可以在不同的代码位置声明相同通道的methodchannel，并且通过<code>invokeMethod</code>进行跨平台的调用。但是<code>setCallHandler</code>只能设置一次（多次调用存在覆盖关系）,因此不能通过在不同页面通过设置对相同通道的回调实现一次调用多次回调的效果。建议在VM中处理通道的回调，并且将回调的数据通过flutter内的事件总线或数据绑定去更新各个页面</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/26/android_1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ai2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/12/ai2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ee2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/11/ee2/">Arduino  入门</a>
+    </h1>
+  
+
+        
+        <a href="/2023/06/11/ee2/" class="archive-article-date">
+  	<time datetime="2023-06-11T13:40:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>入门电子电路的门道千千万，重要的是选择一条路线走一遍，而且基础的数电模电要翻出来看看。最入门的控制模块是单片机，主流的51，arduino，stm32，可以从中选一个开始。基于arduino方便易用的属性，感觉不那么容易令人弃坑，所以这次我选了一块arduino uno r3来开始。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ee</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/11/ee2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ee1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/11/ee1/">单片机入门(转载)</a>
+    </h1>
+  
+
+        
+        <a href="/2023/06/11/ee1/" class="archive-article-date">
+  	<time datetime="2023-06-11T10:18:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一次接触单片机还是在大学做毕设的时候,参考这篇文章，那时候大概是做到了第四步，杂糅了第七步的一点东西。<br>有感于现在不仅仅是ai，也是物联网的时代，多学多看</p>
+<p> 本篇转载自(<a target="_blank" rel="noopener" href="https://mc.dfrobot.com.cn/thread-925-1-1.html">https://mc.dfrobot.com.cn/thread-925-1-1.html</a>)<br> 作者:Eric</p>
+<ul>
+<li>学习使用单片机就是理解单片机硬件结构，以及内部资源的应用,在汇编或C语言中学会各种功能的初始化设置，以及实现各种功能的程序编制。</li>
+</ul>
+<ul>
+<li><p>第一步：数字I/O的使用<br>使用按钮输入信号，发光二极管显示输出电平，就可以学习引脚的数字I/O功能，在按下某个按钮后，某发光二极管发亮，这就是数字电路中组合逻辑的功能，虽然很简单，但是可以学习一般的单片机编程思想，例如，必须设置很多寄存器对引脚进行初始化处理，才能使引脚具备有数字输入和输出输出功能。每使用单片机的一个功能，就要对控制该功能的寄存器进行设置，这就是单片机编程的特点，千万不要怕麻烦，所有的单片机都是这样。</p>
+</li>
+<li><p>第二步：定时器的使用<br>学会定时器的使用，就可以用单片机实现时序电路，时序电路的功能是强大的，在工业、家用电气设备的控制中有很多应用，例如，可以用单片机实现一个具有一个按钮的楼道灯开关，该开关在按钮按下一次后，灯亮3分钟后自动灭，当按钮连续按下两次后，灯常亮不灭，当按钮按下时间超过2s，则灯灭。数字集成电路可以实现时序电路，可编程逻辑器件（PLD）可以实现时序电路，可编程控制器（PLC）也可以实现时序电路，但是只有单片机实现起来最简单，成本最低。     定时器的使用是非常重要的，逻辑加时间控制是单片机使用的基础。</p>
+</li>
+</ul>
+<ul>
+<li>第三步：中断<br>单片机的特点是一段程序反复执行，程序中的每个指令的执行都需要一定的执行时间，如果程序没有执行到某指令，则该指令的动作就不会发生，这样就会耽误很多快速发生的事情，例如，按钮按下时的下降沿。要使单片机在程序正常运行过程中，对快速动作做出反应，就必须使用单片机的中断功能，该功能就是在快速动作发生后，单片机中断正常运行的程序，处理快速发生的动作，处理完成后，在返回执行正常的程序。中断功能使用中的困难是需要精确地知道什么时候不允许中断发生（屏蔽中断）、什么时候允许中断发生（开中断），需要设置哪些寄存器才能使某 种中断起作用，中断开始时，程序应该干什么，中断完成后，程序应该干什么等等 。     中断学会后，就可以编制更复杂结构的程序，这样的程序可以干着一件事，监视着一件事，一旦监视的事情发生，就中断正在干的事情，处理监视的事情，当然也可以监视多个事情，形象的比喻，中断功能使单片机具有吃着碗里的，看着锅里的功能。     以上三步学会，就相当于降龙十八掌武功，会了三掌了，可以勉强护身。</li>
+</ul>
+<ul>
+<li>第四步：与PC机进行RS232通信<br>单片机都有USART接口，特别是MSP430系列中很多型号，都具有两个USART接口。USART接口不能直接与PC机的RS232接口连接，它们之间的逻辑电平不同，需要使用一个MAX3232芯片进行电平转换。    USART接口的使用是非常重要的，通过该接口，可以使单片机与PC机之间交换信息，虽然RS232通信并不先进，但是对于接口的学习是非常重要的。正确使用USART接口，需要学习通信协议，PC机的RS232接口编程等等知识。试想，单片机实验板上的数据显示在PC机监视器上，而PC机的键盘信号可以在单片机实验板上得到显示，将是多么有意思的事情啊！</li>
+</ul>
+<ul>
+<li>第五步：学会A/D转换<br>MAP430单片机带有多通道12位A/D转换器，通过这些A/D转换器可以使单片机操作模拟量，显示和检测电压、电流等信号。学习时注意模拟地与数字地、参考电压、采样时间，转换速率，转换误差等概念。     使用A/D转换功能的简单的例子是设计一个电压表。</li>
+</ul>
+<ul>
+<li>第六步：学会PCI、I2C接口和液晶显示器接口<br>这些接口的使用可以使单片机更容易连接外部设备，在扩展单片机功能方面非常重要。</li>
+</ul>
+<ul>
+<li>第七步：学会比较、捕捉、PWM功能<br>这些功能可以使单片机能够控制电机，检测转速信号，实现电机调速器等控制起功能。     如果以上七步都学会，就可以设计一般的应用系统，相当于学会十招降龙十八掌，可以出手攻击了。</li>
+</ul>
+<ul>
+<li>第八步：学习USB接口、TCP/IP接口、各种工业总线的硬件与软件设计<br>学习USB接口、TCP/IP接口、各种工业总线的硬件与软件设计是非常重要的，因为这是当前产品开发的发展方向。专业单片机技术实训754634522  </li>
+</ul>
+<p>  到此为止，相当于学会15招降龙十八掌，但还不到打遍天下无敌手的境界。即使如此，也算是单片机大虾了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ee</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/11/ee1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-note1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -251,7 +559,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="开个新坑"><a href="#开个新坑" class="headerlink" title="开个新坑"></a>开个新坑</h2><p>aigc的浪潮已经肉眼可见的到来了。不管你愿不愿意，它都会影响到你<br>因此，这是我从业10数年来必须面对的一个5级风暴，毫不犹豫地跳进它，认识它，看看它对自己的生活能产生怎样的影响</p>
-
+<h2 id="prompt-教程"><a href="#prompt-教程" class="headerlink" title="prompt 教程"></a>prompt 教程</h2><h2 id="sd部署"><a href="#sd部署" class="headerlink" title="sd部署"></a>sd部署</h2>
       
 
       
@@ -605,314 +913,6 @@
 
 
   
-    <article id="post-toys_4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/22/toys_4/">20 模型收录小结2 MG篇</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/22/toys_4/" class="archive-article-date">
-  	<time datetime="2021-02-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>收MG，一般还是要看下MG的素质，有些MG真的是太过敷衍了，价格又居高不下。没错！说的就是W系列，《无尽的华尔兹》系列4个PB，TV版本魔改，到现在MG连正经的TV 艾比安或zero都是没有的。<br>所以在买MG的时候，我还是比较倾向于某些作品的主角机又或是怨念物</p>
-<p>于是20年收了不少怨念物：</p>
-        
-          <a class="article-more-a" href="/2021/02/22/toys_4/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">toys</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/22/toys_4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-toys_3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/21/toys_3/">20 模型收录小结_其他作品篇</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/21/toys_3/" class="archive-article-date">
-  	<time datetime="2021-02-21T09:42:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>待更</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">toys</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/21/toys_3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-toys_2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/21/toys_2/">20 模型收录小结 小比例篇</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/21/toys_2/" class="archive-article-date">
-  	<time datetime="2021-02-21T04:09:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>SEED和OO买的多，不代表我就不是UC党，我只是大爱无疆好吗？</p>
-<p>UC充斥着实在太多太多令人心爱的冷门机体。主角机千篇一律，冷门机脑洞大开。这里就不得不提高达的前两部作品，0079和正统续作0087Zeta。作为一个20年了才完整补全tv版zeta的伪高达爱好者，zeta给我留下的印象是：提坦斯好豪啊，2集一台新机。虽然0079的吉翁换机频率更高，但明显很多设计是临时拼凑，在往后的日子里都拿不出手的，甚至，会被逐渐归类到黑历史</p>
-<p>正因为冷门机太多，144比例的HG，RG成为了收集这类机体拼装模型几乎唯一的选择，尽量选择新开模的，会让自己的体验好得多</p>
-<p>以下，很多是凑单凑过来的：</p>
-        
-          <a class="article-more-a" href="/2021/02/21/toys_2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">toys</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/21/toys_2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-toys_1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/20/toys_1/">20 模型收录小结 UC独角兽篇</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/20/toys_1/" class="archive-article-date">
-  	<time datetime="2021-02-20T09:42:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>20年的春节前，和老婆一起去了一次商场，看到MG的深度强袭成品，DNA动了。于是抢在本期绝版前扫到了一个尾货，开启了20年重返天坑的历程。</p>
-<p>紧跟着春节而来的是这次的疫情，让大家都只能莫名地在家呆了一段时间，一夜之间仿佛玩这些的人翻番，静冈工厂是直接停工了么？，于是，新货预定，现货疯涨，成了这个天坑市场一整年的调调。</p>
-<p>虽然到21年已经对gunpla有些审美疲劳，甚至有了脱坑的想法，但该收还是会继续收的。整体的思路还是比较清晰的，接下来的日记也会以不同系列或作品做下自己的20年总结。</p>
-        
-          <a class="article-more-a" href="/2021/02/20/toys_1/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">toys</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/20/toys_1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1022,6 +1022,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">note</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ee</a>
               </li>
             
             <div class="clearfix"></div>
