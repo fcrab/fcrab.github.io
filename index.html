@@ -185,9 +185,9 @@
         <p><code>Flutter</code> 和移动端的原生代码交互主要是依赖<code>MethodChannel</code>实现.通过在其中一边定义<code>CallHandler</code>,另一边调用<code>invokeMethod</code>可以实现代码的相互调用，并获得结果</p>
 <p>以下为一个简单的例子:<br>我们新增两组channel，msgbox用于原生调用flutter代码，device用于flutter调用原生代码，需要注意的是这里的调用都是可以通过回调获取返回值的(使用<code>result.success</code>或<code>result.error</code>)，这里展示的用法是为了展示互相调用的可能性</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line">    原生android代码</span><br><span class="line"> *&#x2F;</span><br><span class="line">class MainActivity: FlutterActivity() &#123;</span><br><span class="line">    &#x2F;&#x2F;原生调用flutter的通道</span><br><span class="line">    private val channelTag &#x3D; &quot;com.united.io&#x2F;msgbox&quot;</span><br><span class="line">    &#x2F;&#x2F;flutter调用原生的通道</span><br><span class="line">    private val originTag &#x3D; &quot;com.united.io&#x2F;device&quot;</span><br><span class="line"></span><br><span class="line">    override fun configureFlutterEngine(flutterEngine: FlutterEngine) &#123;</span><br><span class="line">        super.configureFlutterEngine(flutterEngine)</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;注册被flutter调用的函数,一个通道可以包含多个函数,通过call.method区分</span><br><span class="line">        val channel &#x3D; </span><br><span class="line">            MethodChannel(flutterEngine.dartExecutor.binaryMessenger,originTag)</span><br><span class="line">        channel.setMethodCallHandler &#123; call, result -&gt;</span><br><span class="line">            when(call.method)&#123;</span><br><span class="line">                &quot;refresh&quot;-&gt;&#123;</span><br><span class="line">                    Log.d(&quot;Main&quot;,&quot;call by refresh&quot;)</span><br><span class="line">                    callByChannel()</span><br><span class="line">                    result.success(true)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private fun callByChannel()&#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;调用flutter函数</span><br><span class="line">        flutterEngine?.dartExecutor?.let &#123;</span><br><span class="line">            val callbackChannel  &#x3D; MethodChannel(it.binaryMessenger,channelTag)</span><br><span class="line">            callbackChannel.invokeMethod(&quot;refreshMsg&quot;,true)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line">    flutter代码</span><br><span class="line"> *&#x2F;</span><br><span class="line">class _Page2 extends State&lt;Page2&gt;&#123;</span><br><span class="line">  var counter &#x3D; 0;</span><br><span class="line"></span><br><span class="line">  _Page2()&#123;</span><br><span class="line">    &#x2F;&#x2F;定义flutter对msgbox通道的函数定义，这里对原生调用直接转入alertToRefresh函数，并没有做method的细分</span><br><span class="line">    MethodChannel page2BoxChannel &#x3D; MethodChannel(&quot;com.xuanwu.ipush.io&#x2F;msgbox&quot;);</span><br><span class="line">    page2BoxChannel.setMethodCallHandler((call) &#x3D;&gt; alertToRefresh(call));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Future&lt;dynamic&gt; alertToRefresh(MethodCall call)async&#123;</span><br><span class="line">    print(&quot;call by refresh in page2&quot;);</span><br><span class="line">    &#x2F;&#x2F;当被调用时,counter+2，并且刷新界面</span><br><span class="line">    setState(() &#123;</span><br><span class="line">      counter+&#x3D;2;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @override</span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    return Scaffold(</span><br><span class="line">      &#x2F;&#x2F; extendBodyBehindAppBar: true,</span><br><span class="line">      appBar: AppBar(</span><br><span class="line">        title: Text(&quot;Page2&quot;),</span><br><span class="line">        centerTitle: true,</span><br><span class="line">      ),</span><br><span class="line">      body: Center(</span><br><span class="line">        child: Column(</span><br><span class="line">          mainAxisAlignment: MainAxisAlignment.center,</span><br><span class="line">          children: &lt;Widget&gt;[</span><br><span class="line">            const Text(</span><br><span class="line">              &#39;final page 2&#39;,</span><br><span class="line">            ),</span><br><span class="line">            Text(</span><br><span class="line">              &#39;$counter&#39;,</span><br><span class="line">              style: Theme.of(context).textTheme.headline4,</span><br><span class="line">            ),</span><br><span class="line">            TextButton(onPressed: ()&#123;</span><br><span class="line">                &#x2F;&#x2F;通过点击调用原生device的refresh方法.</span><br><span class="line">                &#x2F;&#x2F;通道定义:</span><br><span class="line">                &#x2F;&#x2F;static const originChannel &#x3D; const MethodChannel(&quot;com.xuanwu.ipush.io&#x2F;device&quot;)</span><br><span class="line">              ExamGlobal.originChannel.invokeMethod(&quot;refresh&quot;);</span><br><span class="line">            &#125;, child: Text(&quot;add_2&quot;))</span><br><span class="line">          ],</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>注意:<br>我们可以在不同的代码位置声明相同通道的methodchannel，并且通过<code>invokeMethod</code>进行跨平台的调用。但是<code>setCallHandler</code>只能设置一次（多次调用存在覆盖关系）,因此不能通过在不同页面通过设置对相同通道的回调实现一次调用多次回调的效果。建议在VM中处理通道的回调，并且将回调的数据通过flutter内的事件总线或数据绑定去更新各个页面</p>
-
+        
+          <a class="article-more-a" href="/2023/06/26/android_1/#more">more >></a>
+        
       
 
       
@@ -211,53 +211,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/06/26/android_1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ai2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/06/12/ai2/">展开全文 >></a>
         </p>
       
 
@@ -884,6 +837,83 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/03/31/booklist/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-toys_4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/22/toys_4/">20 模型收录小结2 MG篇</a>
+    </h1>
+  
+
+        
+        <a href="/2021/02/22/toys_4/" class="archive-article-date">
+  	<time datetime="2021-02-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>收MG，一般还是要看下MG的素质，有些MG真的是太过敷衍了，价格又居高不下。没错！说的就是W系列，《无尽的华尔兹》系列4个PB，TV版本魔改，到现在MG连正经的TV 艾比安或zero都是没有的。<br>所以在买MG的时候，我还是比较倾向于某些作品的主角机又或是怨念物</p>
+<p>于是20年收了不少怨念物：</p>
+        
+          <a class="article-more-a" href="/2021/02/22/toys_4/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">toys</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/02/22/toys_4/">展开全文 >></a>
         </p>
       
 
