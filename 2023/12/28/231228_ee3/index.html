@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Adruino编程小结 | fcs cave</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="板子买了半年了，看代码只看了几次。但是有些基础操作可以记录一下首先是配套的Arduino IDE里面有完整的example,通过阅读这些代码可以了解其基本的编程方式以及常用的接口。以下简单对一些例子进行解释，并标记常用函数.(待续)">
+  <meta name="description" content="板子买了半年了，看代码只看了几次。但是有些基础操作可以记录一下首先是配套的Arduino IDE里面有完整的example,通过阅读这些代码可以了解其基本的编程方式以及常用的接口。以下简单对一些例子进行解释，并标记常用函数.(待续) 语言是C.执行文件是.ino,编译后默认引入了板子的一些定义 基础程序结构： 1234567891011&#x2F;&#x2F; 初始化设定void setup()&amp;#123;    &#x2F;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Adruino编程小结">
 <meta property="og:url" content="http://example.com/2023/12/28/231228_ee3/index.html">
 <meta property="og:site_name" content="fcs cave">
-<meta property="og:description" content="板子买了半年了，看代码只看了几次。但是有些基础操作可以记录一下首先是配套的Arduino IDE里面有完整的example,通过阅读这些代码可以了解其基本的编程方式以及常用的接口。以下简单对一些例子进行解释，并标记常用函数.(待续)">
+<meta property="og:description" content="板子买了半年了，看代码只看了几次。但是有些基础操作可以记录一下首先是配套的Arduino IDE里面有完整的example,通过阅读这些代码可以了解其基本的编程方式以及常用的接口。以下简单对一些例子进行解释，并标记常用函数.(待续) 语言是C.执行文件是.ino,编译后默认引入了板子的一些定义 基础程序结构： 1234567891011&#x2F;&#x2F; 初始化设定void setup()&amp;#123;    &#x2F;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-12-28T09:51:00.000Z">
-<meta property="article:modified_time" content="2024-01-02T16:49:09.053Z">
+<meta property="article:modified_time" content="2024-01-07T16:22:03.116Z">
 <meta property="article:author" content="fcrab">
 <meta property="article:tag" content="ee">
 <meta name="twitter:card" content="summary">
@@ -186,7 +186,17 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>板子买了半年了，看代码只看了几次。但是有些基础操作可以记录一下<br>首先是配套的Arduino IDE里面有完整的example,通过阅读这些代码可以了解其基本的编程方式以及常用的接口。以下简单对一些例子进行解释，并标记常用函数.(待续)</p>
+<p>语言是C.<br>执行文件是.ino,编译后默认引入了板子的一些定义</p>
+<p>基础程序结构：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 初始化设定</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 循环执行</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<p>板子的一些常量:</p>
+<p>引脚定义:<br>pins_arduino.h</p>
+<p>例如自带的led是 LED_BUILTIN<br>在sample BlinkWithoutDelay中可以看到它的操作方式</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//点亮led</span></span><br><span class="line"><span class="keyword">int</span> ledPin = LED_BUILTIN;</span><br><span class="line"><span class="keyword">int</span> ledState = HIGH;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span>&#123;</span><br><span class="line">    pinMode(ledPin,OUTPUT);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span></span>&#123;</span><br><span class="line">    digitalWrite(ledPin,ledState);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述是关于输出的，那么输入同理，参考Button</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> buttonPin = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">int</span> buttonState = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span>&#123;</span><br><span class="line">    pinMode(buttonPin,INPUT);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span></span>&#123;</span><br><span class="line">    buttonState = digitalRead(buttonPin);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       

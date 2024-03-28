@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>书单 2106 | fcs cave</title>
+  <title>Android 第三方定位总结 | fcs cave</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这个栏目是为了证明我还有余力在看书，顺便写点笔记，或者感想 本月：Understanding Unix&#x2F;Linux Programming">
+  <meta name="description" content="定位，这么多年了，早就该成熟了但权限的修改，系统的升级，还有图商们的改动。再加上各位面对的各种app工程架构，让你很难按照官方的文档去无风险的完成编程 标准做法12345678910111213141516171819202122232425262728293031323334353637383940414243&#x2F;&#x2F;高德var mALbsClient:AMapLocationClient? &#x3D; n">
 <meta property="og:type" content="article">
-<meta property="og:title" content="书单 2106">
-<meta property="og:url" content="http://example.com/2021/06/28/210628_book1/index.html">
+<meta property="og:title" content="Android 第三方定位总结">
+<meta property="og:url" content="http://example.com/2024/01/11/240111_lbs_in_android/index.html">
 <meta property="og:site_name" content="fcs cave">
-<meta property="og:description" content="这个栏目是为了证明我还有余力在看书，顺便写点笔记，或者感想 本月：Understanding Unix&#x2F;Linux Programming">
+<meta property="og:description" content="定位，这么多年了，早就该成熟了但权限的修改，系统的升级，还有图商们的改动。再加上各位面对的各种app工程架构，让你很难按照官方的文档去无风险的完成编程 标准做法12345678910111213141516171819202122232425262728293031323334353637383940414243&#x2F;&#x2F;高德var mALbsClient:AMapLocationClient? &#x3D; n">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-06-28T02:24:00.000Z">
-<meta property="article:modified_time" content="2023-12-27T15:43:10.988Z">
+<meta property="article:published_time" content="2024-01-11T10:08:10.000Z">
+<meta property="article:modified_time" content="2024-03-28T15:10:21.210Z">
 <meta property="article:author" content="fcrab">
 <meta property="article:tag" content="dev">
 <meta name="twitter:card" content="summary">
@@ -165,28 +165,45 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-210628_book1" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-240111_lbs_in_android" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      书单 2106
+      Android 第三方定位总结
     </h1>
   
 
         
-        <a href="/2021/06/28/210628_book1/" class="archive-article-date">
-  	<time datetime="2021-06-28T02:24:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-28</time>
+        <a href="/2024/01/11/240111_lbs_in_android/" class="archive-article-date">
+  	<time datetime="2024-01-11T10:08:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这个栏目是为了证明我还有余力在看书，顺便写点笔记，或者感想</p>
-<p>本月：<br>Understanding Unix/Linux Programming</p>
+        <p>定位，这么多年了，早就该成熟了<br>但权限的修改，系统的升级，还有图商们的改动。再加上各位面对的各种app工程架构，让你很难按照官方的文档去无风险的完成编程</p>
+<h2 id="标准做法"><a href="#标准做法" class="headerlink" title="标准做法"></a>标准做法</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//高德</span></span><br><span class="line"><span class="keyword">var</span> mALbsClient:AMapLocationClient? = <span class="literal">null</span></span><br><span class="line"><span class="keyword">var</span> listener:AMapLocationListener? = <span class="literal">null</span></span><br><span class="line"><span class="comment">//百度</span></span><br><span class="line"><span class="keyword">var</span> mBLbsClient:LocationClient? = <span class="literal">null</span></span><br><span class="line"><span class="keyword">var</span> aListener:BDAbstractLocationListener? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// 高德</span></span><br><span class="line">    listener = AMapLocationListener()</span><br><span class="line">    <span class="comment">//初始化定位</span></span><br><span class="line">    mALbsClient = AMapLocationClient(getApplicationContext())</span><br><span class="line">    <span class="comment">//设置定位回调监听</span></span><br><span class="line">    mALbsClient.setLocationListener(listener)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 百度</span></span><br><span class="line">    aListener = <span class="keyword">object</span>:BDAbstractLocationListener&#123;...&#125;</span><br><span class="line">    mBLbsClient = LocationClient(getApplicationContext())</span><br><span class="line">    <span class="keyword">val</span> option = LocationClientOption()</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    option.setIgnoreKillProcess(<span class="literal">true</span>)   <span class="comment">//默认true，在stop的时候是否关闭sdk的service</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    mBLbsClient.setLocOption(option)</span><br><span class="line">    mBLbsClient.start()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onStop</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// 关闭高德定位</span></span><br><span class="line">    <span class="keyword">if</span>(mALbsClient?.isStarted)&#123;</span><br><span class="line">        mALbsClient.unRegisterLocationListener(listener)</span><br><span class="line">        mALbsClient.stopLocation()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭百度定位</span></span><br><span class="line">    mBLbsClient?.unRegisterLocationListener(aListener)</span><br><span class="line">    mBLbsClient?.stop()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDestroy</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//销毁服务</span></span><br><span class="line">    mALbsClient.onDestory()</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="一些坑"><a href="#一些坑" class="headerlink" title="一些坑"></a>一些坑</h2><ol>
+<li>首先是权限的收紧，伴随着国内应用市场的严格审核，需要做到以下规范：</li>
+</ol>
+<ul>
+<li>不能随意的在activity中开启定位服务。</li>
+<li>在首页等用户第一次获取权限的定位位置时，最好能够展示地图，否则需要以明显弹窗告知用户权限使用的范围和目的<br>问题很明显在关闭</li>
+</ul>
+<ol start="2">
+<li>APP的架构问题：<br>像demo那样标准的使用方式已经越来越少了，一般我们还是会对定位封装成一个带UI的widget，或者是一套自定义的service。这里的问题主要在于生命周期的管理，由于页面退出而没有自动解除listener等造成了leak等问题。也有可能页面具有多个定位widget或多个业务使用而造成的资源浪费，内存管理问题，生命周期问题（例如第一个widget定位完成后关闭定位，导致后面的定位请求被闲置）</li>
+</ol>
+<h2 id="解决一些问题"><a href="#解决一些问题" class="headerlink" title="解决一些问题"></a>解决一些问题</h2><ol>
+<li>采用观察者模式，管理订阅定位信息的代码</li>
+<li>AOP前置拦截，规范定位权限申请</li>
+<li>注册返回监听的时候，所使用到的对象不要使用weakReference之类的变量。以免在listener内执行，由于线程切换等原因，在listner先行退出的情况下，变量被清空。</li>
+<li>通过androidx的activity生命周期管理，明确client的stop时机，如果是，不要执行高德的onDestory，或者将百度的setIgnoreKillProcess设为false。保留其service的留存</li>
+</ol>
 
       
 
@@ -256,7 +273,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/06/28/210628_book1/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/01/11/240111_lbs_in_android/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -270,18 +287,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2022/08/21/220821_pic_analyze/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2024/02/06/240206_read_the_fxxking_book_1/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          一些图片相似度对比法
+          读书笔记_0-1
         
       </div>
     </a>
   
   
-    <a href="/2021/06/28/210628_toys_5/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">21 上半年模型收录</div>
+    <a href="/2024/01/09/240109_android_permission_tip/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android 动态权限附加信息</div>
       <i class="icon-circle-right"></i>
     </a>
   

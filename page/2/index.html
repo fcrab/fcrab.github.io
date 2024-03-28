@@ -162,29 +162,355 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-210628_book1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-230611_ee2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/06/28/210628_book1/">书单 2106</a>
+      <a class="article-title" href="/2023/06/11/230611_ee2/">Arduino  入门</a>
     </h1>
   
 
         
-        <a href="/2021/06/28/210628_book1/" class="archive-article-date">
-  	<time datetime="2021-06-28T02:24:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-28</time>
+        <a href="/2023/06/11/230611_ee2/" class="archive-article-date">
+  	<time datetime="2023-06-11T13:40:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这个栏目是为了证明我还有余力在看书，顺便写点笔记，或者感想</p>
-<p>本月：<br>Understanding Unix/Linux Programming</p>
+        <p>入门电子电路的门道千千万，重要的是选择一条路线走一遍，而且基础的数电模电要翻出来看看。最入门的控制模块是单片机，主流的51，arduino，stm32，可以从中选一个开始。基于arduino方便易用的属性，感觉不那么容易令人弃坑，所以这次我选了一块arduino uno r3来开始。</p>
 
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ee</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/11/230611_ee2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-230611_ee1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/11/230611_ee1/">单片机入门(转载)</a>
+    </h1>
+  
+
+        
+        <a href="/2023/06/11/230611_ee1/" class="archive-article-date">
+  	<time datetime="2023-06-11T10:18:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一次接触单片机还是在大学做毕设的时候,参考这篇文章，那时候大概是做到了第四步，杂糅了第七步的一点东西。<br>有感于现在不仅仅是ai，也是物联网的时代，多学多看</p>
+<p> 本篇转载自(<a target="_blank" rel="noopener" href="https://mc.dfrobot.com.cn/thread-925-1-1.html">https://mc.dfrobot.com.cn/thread-925-1-1.html</a>)<br> 作者:Eric</p>
+<ul>
+<li>学习使用单片机就是理解单片机硬件结构，以及内部资源的应用,在汇编或C语言中学会各种功能的初始化设置，以及实现各种功能的程序编制。</li>
+</ul>
+<ul>
+<li><p>第一步：数字I/O的使用<br>使用按钮输入信号，发光二极管显示输出电平，就可以学习引脚的数字I/O功能，在按下某个按钮后，某发光二极管发亮，这就是数字电路中组合逻辑的功能，虽然很简单，但是可以学习一般的单片机编程思想，例如，必须设置很多寄存器对引脚进行初始化处理，才能使引脚具备有数字输入和输出输出功能。每使用单片机的一个功能，就要对控制该功能的寄存器进行设置，这就是单片机编程的特点，千万不要怕麻烦，所有的单片机都是这样。</p>
+</li>
+<li><p>第二步：定时器的使用<br>学会定时器的使用，就可以用单片机实现时序电路，时序电路的功能是强大的，在工业、家用电气设备的控制中有很多应用，例如，可以用单片机实现一个具有一个按钮的楼道灯开关，该开关在按钮按下一次后，灯亮3分钟后自动灭，当按钮连续按下两次后，灯常亮不灭，当按钮按下时间超过2s，则灯灭。数字集成电路可以实现时序电路，可编程逻辑器件（PLD）可以实现时序电路，可编程控制器（PLC）也可以实现时序电路，但是只有单片机实现起来最简单，成本最低。     定时器的使用是非常重要的，逻辑加时间控制是单片机使用的基础。</p>
+</li>
+</ul>
+<ul>
+<li>第三步：中断<br>单片机的特点是一段程序反复执行，程序中的每个指令的执行都需要一定的执行时间，如果程序没有执行到某指令，则该指令的动作就不会发生，这样就会耽误很多快速发生的事情，例如，按钮按下时的下降沿。要使单片机在程序正常运行过程中，对快速动作做出反应，就必须使用单片机的中断功能，该功能就是在快速动作发生后，单片机中断正常运行的程序，处理快速发生的动作，处理完成后，在返回执行正常的程序。中断功能使用中的困难是需要精确地知道什么时候不允许中断发生（屏蔽中断）、什么时候允许中断发生（开中断），需要设置哪些寄存器才能使某 种中断起作用，中断开始时，程序应该干什么，中断完成后，程序应该干什么等等 。     中断学会后，就可以编制更复杂结构的程序，这样的程序可以干着一件事，监视着一件事，一旦监视的事情发生，就中断正在干的事情，处理监视的事情，当然也可以监视多个事情，形象的比喻，中断功能使单片机具有吃着碗里的，看着锅里的功能。     以上三步学会，就相当于降龙十八掌武功，会了三掌了，可以勉强护身。</li>
+</ul>
+<ul>
+<li>第四步：与PC机进行RS232通信<br>单片机都有USART接口，特别是MSP430系列中很多型号，都具有两个USART接口。USART接口不能直接与PC机的RS232接口连接，它们之间的逻辑电平不同，需要使用一个MAX3232芯片进行电平转换。    USART接口的使用是非常重要的，通过该接口，可以使单片机与PC机之间交换信息，虽然RS232通信并不先进，但是对于接口的学习是非常重要的。正确使用USART接口，需要学习通信协议，PC机的RS232接口编程等等知识。试想，单片机实验板上的数据显示在PC机监视器上，而PC机的键盘信号可以在单片机实验板上得到显示，将是多么有意思的事情啊！</li>
+</ul>
+<ul>
+<li>第五步：学会A/D转换<br>MAP430单片机带有多通道12位A/D转换器，通过这些A/D转换器可以使单片机操作模拟量，显示和检测电压、电流等信号。学习时注意模拟地与数字地、参考电压、采样时间，转换速率，转换误差等概念。     使用A/D转换功能的简单的例子是设计一个电压表。</li>
+</ul>
+<ul>
+<li>第六步：学会PCI、I2C接口和液晶显示器接口<br>这些接口的使用可以使单片机更容易连接外部设备，在扩展单片机功能方面非常重要。</li>
+</ul>
+<ul>
+<li>第七步：学会比较、捕捉、PWM功能<br>这些功能可以使单片机能够控制电机，检测转速信号，实现电机调速器等控制起功能。     如果以上七步都学会，就可以设计一般的应用系统，相当于学会十招降龙十八掌，可以出手攻击了。</li>
+</ul>
+<ul>
+<li>第八步：学习USB接口、TCP/IP接口、各种工业总线的硬件与软件设计<br>学习USB接口、TCP/IP接口、各种工业总线的硬件与软件设计是非常重要的，因为这是当前产品开发的发展方向。专业单片机技术实训754634522  </li>
+</ul>
+<p>  到此为止，相当于学会15招降龙十八掌，但还不到打遍天下无敌手的境界。即使如此，也算是单片机大虾了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ee</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/11/230611_ee1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-230609_ai1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/09/230609_ai1/">跳入AIGC的潮水里</a>
+    </h1>
+  
+
+        
+        <a href="/2023/06/09/230609_ai1/" class="archive-article-date">
+  	<time datetime="2023-06-09T06:17:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="开个新坑"><a href="#开个新坑" class="headerlink" title="开个新坑"></a>开个新坑</h2><p>aigc的浪潮已经肉眼可见的到来了。不管你愿不愿意，它都会影响到你<br>因此，这是我从业10数年来必须面对的一个5级风暴，毫不犹豫地跳进它，认识它，看看它对自己的生活能产生怎样的影响</p>
+<h2 id="一些基本概念"><a href="#一些基本概念" class="headerlink" title="一些基本概念"></a>一些基本概念</h2><h2 id="prompt-教程"><a href="#prompt-教程" class="headerlink" title="prompt 教程"></a>prompt 教程</h2><h2 id="sd部署"><a href="#sd部署" class="headerlink" title="sd部署"></a>sd部署</h2>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ai</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/09/230609_ai1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-230609_note1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/09/230609_note1/">只是为了不让tag空着</a>
+    </h1>
+  
+
+        
+        <a href="/2023/06/09/230609_note1/" class="archive-article-date">
+  	<time datetime="2023-06-09T06:17:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h2><p>本来以为我会在这个tag里面写一些生活片段，会有一些出游的片段，会有我学会拍照后拍到的帅气的场景<br>但事与愿违，无论是身体条件，还是赚钱的能力，这几年的疫情，都生动地刻画了一个年轻人直面自己成为一个再普通不过的中年人过程<br>还好，我仍对生活抱有期待，对这里以后的内容我也抱有期待</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">note</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/09/230609_note1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-220821_pic_analyze" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/08/21/220821_pic_analyze/">一些图片相似度对比法</a>
+    </h1>
+  
+
+        
+        <a href="/2022/08/21/220821_pic_analyze/" class="archive-article-date">
+  	<time datetime="2022-08-21T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="全像素对比"><a href="#全像素对比" class="headerlink" title="全像素对比"></a>全像素对比</h4>
+        
+          <a class="article-more-a" href="/2022/08/21/220821_pic_analyze/#more">more >></a>
+        
       
 
       
@@ -207,7 +533,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/06/28/210628_book1/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/08/21/220821_pic_analyze/">展开全文 >></a>
         </p>
       
 
@@ -592,319 +918,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/02/20/210220_toys_1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-210117_welcome" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/17/210117_welcome/">welcome back</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/17/210117_welcome/" class="archive-article-date">
-  	<time datetime="2021-01-17T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>早前的东西已经不知去了哪。21年，继续开更</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/17/210117_welcome/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-180718_fourteen" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/18/180718_fourteen/">HAXM升级踩到的坑</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/18/180718_fourteen/" class="archive-article-date">
-  	<time datetime="2018-07-18T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>升级了一波Android Studio。打开虚拟机的时候告诉我Emulator: Incompatible HAX module version 3,requires minimum version 4<br>嗯。版本太旧了，得升级一下HAXM<br>打开AS自带的sdk manager,找到haxm，<br>安装！<br>error?????</p>
-        
-          <a class="article-more-a" href="/2018/07/18/180718_fourteen/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/18/180718_fourteen/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-180625_twelve" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/25/180625_twelve/">好用的Android第三方库(长期更新)</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/25/180625_twelve/" class="archive-article-date">
-  	<time datetime="2018-06-25T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>SqlCipher<br><a target="_blank" rel="noopener" href="https://www.zetetic.net/sqlcipher/sqlcipher-for-android/">https://www.zetetic.net/sqlcipher/sqlcipher-for-android/</a><br><a target="_blank" rel="noopener" href="https://github.com/sqlcipher/android-database-sqlcipher">https://github.com/sqlcipher/android-database-sqlcipher</a><br>数据库加密</p>
-<p>stetho<br>facebook的调试桥，最大的特点是可以使用chrome实时调试，做http拦截和db操作</p>
-<p>amitshekhar<br><a target="_blank" rel="noopener" href="https://github.com/amitshekhariitbhu/Android-Debug-Database">https://github.com/amitshekhariitbhu/Android-Debug-Database</a><br>一个db调试库<br>amishekhar</p>
-<p>joda time<br><a target="_blank" rel="noopener" href="http://www.joda.org/joda-time/">http://www.joda.org/joda-time/</a><br><a target="_blank" rel="noopener" href="https://github.com/JodaOrg/joda-time">https://github.com/JodaOrg/joda-time</a><br>能够简便操作时间的库</p>
-<p>jsoup<br>html解析库</p>
-<p>flexbox</p>
-<p>jsonPath<br><a target="_blank" rel="noopener" href="https://github.com/json-path/JsonPath">https://github.com/json-path/JsonPath</a><br>不需要建bean直接操纵json对象</p>
-<p>CircleImageView<br><a target="_blank" rel="noopener" href="https://github.com/hdodenhof/CircleImageView">https://github.com/hdodenhof/CircleImageView</a><br>一个把image用圆形显示的控件<br>circle</p>
-<p>timeline-view<br><a target="_blank" rel="noopener" href="https://github.com/vipulasri/Timeline-View">https://github.com/vipulasri/Timeline-View</a><br>时间轴控件<br>timeline2</p>
-<p>jjwt<br><a target="_blank" rel="noopener" href="https://github.com/jwtk/jjwt">https://github.com/jwtk/jjwt</a><br>Java JWT: JSON Web Token for Java and Android</p>
-<p>orhanobut.logger<br><a target="_blank" rel="noopener" href="https://github.com/orhanobut/logger">https://github.com/orhanobut/logger</a><br>一个加强型的Logger。很好看<br>logger</p>
-<p>RxAppState<br><a target="_blank" rel="noopener" href="https://github.com/jenzz/RxAppState">https://github.com/jenzz/RxAppState</a><br>一个使用rx监控app状态的库</p>
-<p>Material-dialogs<br><a target="_blank" rel="noopener" href="https://github.com/afollestad/material-dialogs">https://github.com/afollestad/material-dialogs</a><br>material风格的对话框控件<br>dialog</p>
-<p>J2V8<br><a target="_blank" rel="noopener" href="https://github.com/eclipsesource/J2V8">https://github.com/eclipsesource/J2V8</a><br>Android JS引擎</p>
-<p>OkGo<br><a target="_blank" rel="noopener" href="https://github.com/jeasonlzy/okhttp-OkGo">https://github.com/jeasonlzy/okhttp-OkGo</a><br>一个基于okhttp的标准RESTful风格的网络框架<br>okgo</p>
-<p>xrecyclerview<br><a target="_blank" rel="noopener" href="https://github.com/XRecyclerView/XRecyclerView">https://github.com/XRecyclerView/XRecyclerView</a><br>一个支持上下滑动的recyclerview，有bug，慎用<br>xrecyclerview</p>
-<p>expandable-recycler-view<br><a target="_blank" rel="noopener" href="https://github.com/thoughtbot/expandable-recycler-view">https://github.com/thoughtbot/expandable-recycler-view</a><br>折叠列表。这个是新的，应该比较好用。项目中之前使用的是 <a target="_blank" rel="noopener" href="https://github.com/bignerdranch/expandable-recycler-view">https://github.com/bignerdranch/expandable-recycler-view</a> 已经被废弃<br>expand</p>
-<p>BaseRecyclerViewAdapterHelper<br><a target="_blank" rel="noopener" href="https://github.com/CymChad/BaseRecyclerViewAdapterHelper">https://github.com/CymChad/BaseRecyclerViewAdapterHelper</a><br>一个很好用的recyclerview扩展.<br>BaseRecyclerview</p>
-<p>rxpermissions2<br><a target="_blank" rel="noopener" href="https://github.com/tbruyelle/RxPermissions">https://github.com/tbruyelle/RxPermissions</a><br>一个rx的权限控制库</p>
-<p>photoView<br><a target="_blank" rel="noopener" href="https://github.com/chrisbanes/PhotoView">https://github.com/chrisbanes/PhotoView</a><br>图片浏览库</p>
-<p>glide<br><a target="_blank" rel="noopener" href="https://bumptech.github.io/glide/">https://bumptech.github.io/glide/</a><br><a target="_blank" rel="noopener" href="https://github.com/bumptech/glide">https://github.com/bumptech/glide</a><br>不用多说，google官方的图片加载库<br>glide</p>
-<p>android-crop<br><a target="_blank" rel="noopener" href="https://github.com/jdamcd/android-crop">https://github.com/jdamcd/android-crop</a><br>提供图片裁剪功能<br>crop</p>
-<p>RecyclerViewSnap<br><a target="_blank" rel="noopener" href="https://github.com/rubensousa/RecyclerViewSnap">https://github.com/rubensousa/RecyclerViewSnap</a><br>处理recyclerview滑动布局的辅助库<br>snap</p>
-<p>Recyclerview-animators<br><a target="_blank" rel="noopener" href="https://github.com/wasabeef/recyclerview-animators">https://github.com/wasabeef/recyclerview-animators</a><br>提供recyclerview的多种动画效果<br>animators<br>收集的其他框架<br>flutter<br><a target="_blank" rel="noopener" href="https://flutter.io/">https://flutter.io/</a><br>Mobile开发框架，才preview 1.类似RN，谨慎看好<br>flutter</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/25/180625_twelve/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-180625_thirdteen" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/25/180625_thirdteen/">ClassLoader in Android</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/25/180625_thirdteen/" class="archive-article-date">
-  	<time datetime="2018-06-25T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Parent-Delegation-Model-双亲委托模型"><a href="#Parent-Delegation-Model-双亲委托模型" class="headerlink" title="Parent Delegation Model(双亲委托模型)"></a>Parent Delegation Model(双亲委托模型)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;classloader构造方法,子classloader持有父classloader</span><br><span class="line">protected ClassLoader(ClassLoader parent)&#123;</span><br><span class="line">  this(checkCreateClassLoader(),parent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>classloader对class的加载过程:</p>
-        
-          <a class="article-more-a" href="/2018/06/25/180625_thirdteen/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/25/180625_thirdteen/">展开全文 >></a>
         </p>
       
 

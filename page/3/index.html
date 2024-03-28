@@ -162,6 +162,319 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-210117_welcome" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/17/210117_welcome/">welcome back</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/17/210117_welcome/" class="archive-article-date">
+  	<time datetime="2021-01-17T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>早前的东西已经不知去了哪。21年，继续开更</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/17/210117_welcome/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-180718_fourteen" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/18/180718_fourteen/">HAXM升级踩到的坑</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/18/180718_fourteen/" class="archive-article-date">
+  	<time datetime="2018-07-18T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>升级了一波Android Studio。打开虚拟机的时候告诉我Emulator: Incompatible HAX module version 3,requires minimum version 4<br>嗯。版本太旧了，得升级一下HAXM<br>打开AS自带的sdk manager,找到haxm，<br>安装！<br>error?????</p>
+        
+          <a class="article-more-a" href="/2018/07/18/180718_fourteen/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/18/180718_fourteen/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-180625_thirdteen" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/25/180625_thirdteen/">ClassLoader in Android</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/25/180625_thirdteen/" class="archive-article-date">
+  	<time datetime="2018-06-25T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Parent-Delegation-Model-双亲委托模型"><a href="#Parent-Delegation-Model-双亲委托模型" class="headerlink" title="Parent Delegation Model(双亲委托模型)"></a>Parent Delegation Model(双亲委托模型)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;classloader构造方法,子classloader持有父classloader</span><br><span class="line">protected ClassLoader(ClassLoader parent)&#123;</span><br><span class="line">  this(checkCreateClassLoader(),parent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>classloader对class的加载过程:</p>
+        
+          <a class="article-more-a" href="/2018/06/25/180625_thirdteen/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/25/180625_thirdteen/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-180625_twelve" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/25/180625_twelve/">好用的Android第三方库(长期更新)</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/25/180625_twelve/" class="archive-article-date">
+  	<time datetime="2018-06-25T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SqlCipher<br><a target="_blank" rel="noopener" href="https://www.zetetic.net/sqlcipher/sqlcipher-for-android/">https://www.zetetic.net/sqlcipher/sqlcipher-for-android/</a><br><a target="_blank" rel="noopener" href="https://github.com/sqlcipher/android-database-sqlcipher">https://github.com/sqlcipher/android-database-sqlcipher</a><br>数据库加密</p>
+<p>stetho<br>facebook的调试桥，最大的特点是可以使用chrome实时调试，做http拦截和db操作</p>
+<p>amitshekhar<br><a target="_blank" rel="noopener" href="https://github.com/amitshekhariitbhu/Android-Debug-Database">https://github.com/amitshekhariitbhu/Android-Debug-Database</a><br>一个db调试库<br>amishekhar</p>
+<p>joda time<br><a target="_blank" rel="noopener" href="http://www.joda.org/joda-time/">http://www.joda.org/joda-time/</a><br><a target="_blank" rel="noopener" href="https://github.com/JodaOrg/joda-time">https://github.com/JodaOrg/joda-time</a><br>能够简便操作时间的库</p>
+<p>jsoup<br>html解析库</p>
+<p>flexbox</p>
+<p>jsonPath<br><a target="_blank" rel="noopener" href="https://github.com/json-path/JsonPath">https://github.com/json-path/JsonPath</a><br>不需要建bean直接操纵json对象</p>
+<p>CircleImageView<br><a target="_blank" rel="noopener" href="https://github.com/hdodenhof/CircleImageView">https://github.com/hdodenhof/CircleImageView</a><br>一个把image用圆形显示的控件<br>circle</p>
+<p>timeline-view<br><a target="_blank" rel="noopener" href="https://github.com/vipulasri/Timeline-View">https://github.com/vipulasri/Timeline-View</a><br>时间轴控件<br>timeline2</p>
+<p>jjwt<br><a target="_blank" rel="noopener" href="https://github.com/jwtk/jjwt">https://github.com/jwtk/jjwt</a><br>Java JWT: JSON Web Token for Java and Android</p>
+<p>orhanobut.logger<br><a target="_blank" rel="noopener" href="https://github.com/orhanobut/logger">https://github.com/orhanobut/logger</a><br>一个加强型的Logger。很好看<br>logger</p>
+<p>RxAppState<br><a target="_blank" rel="noopener" href="https://github.com/jenzz/RxAppState">https://github.com/jenzz/RxAppState</a><br>一个使用rx监控app状态的库</p>
+<p>Material-dialogs<br><a target="_blank" rel="noopener" href="https://github.com/afollestad/material-dialogs">https://github.com/afollestad/material-dialogs</a><br>material风格的对话框控件<br>dialog</p>
+<p>J2V8<br><a target="_blank" rel="noopener" href="https://github.com/eclipsesource/J2V8">https://github.com/eclipsesource/J2V8</a><br>Android JS引擎</p>
+<p>OkGo<br><a target="_blank" rel="noopener" href="https://github.com/jeasonlzy/okhttp-OkGo">https://github.com/jeasonlzy/okhttp-OkGo</a><br>一个基于okhttp的标准RESTful风格的网络框架<br>okgo</p>
+<p>xrecyclerview<br><a target="_blank" rel="noopener" href="https://github.com/XRecyclerView/XRecyclerView">https://github.com/XRecyclerView/XRecyclerView</a><br>一个支持上下滑动的recyclerview，有bug，慎用<br>xrecyclerview</p>
+<p>expandable-recycler-view<br><a target="_blank" rel="noopener" href="https://github.com/thoughtbot/expandable-recycler-view">https://github.com/thoughtbot/expandable-recycler-view</a><br>折叠列表。这个是新的，应该比较好用。项目中之前使用的是 <a target="_blank" rel="noopener" href="https://github.com/bignerdranch/expandable-recycler-view">https://github.com/bignerdranch/expandable-recycler-view</a> 已经被废弃<br>expand</p>
+<p>BaseRecyclerViewAdapterHelper<br><a target="_blank" rel="noopener" href="https://github.com/CymChad/BaseRecyclerViewAdapterHelper">https://github.com/CymChad/BaseRecyclerViewAdapterHelper</a><br>一个很好用的recyclerview扩展.<br>BaseRecyclerview</p>
+<p>rxpermissions2<br><a target="_blank" rel="noopener" href="https://github.com/tbruyelle/RxPermissions">https://github.com/tbruyelle/RxPermissions</a><br>一个rx的权限控制库</p>
+<p>photoView<br><a target="_blank" rel="noopener" href="https://github.com/chrisbanes/PhotoView">https://github.com/chrisbanes/PhotoView</a><br>图片浏览库</p>
+<p>glide<br><a target="_blank" rel="noopener" href="https://bumptech.github.io/glide/">https://bumptech.github.io/glide/</a><br><a target="_blank" rel="noopener" href="https://github.com/bumptech/glide">https://github.com/bumptech/glide</a><br>不用多说，google官方的图片加载库<br>glide</p>
+<p>android-crop<br><a target="_blank" rel="noopener" href="https://github.com/jdamcd/android-crop">https://github.com/jdamcd/android-crop</a><br>提供图片裁剪功能<br>crop</p>
+<p>RecyclerViewSnap<br><a target="_blank" rel="noopener" href="https://github.com/rubensousa/RecyclerViewSnap">https://github.com/rubensousa/RecyclerViewSnap</a><br>处理recyclerview滑动布局的辅助库<br>snap</p>
+<p>Recyclerview-animators<br><a target="_blank" rel="noopener" href="https://github.com/wasabeef/recyclerview-animators">https://github.com/wasabeef/recyclerview-animators</a><br>提供recyclerview的多种动画效果<br>animators<br>收集的其他框架<br>flutter<br><a target="_blank" rel="noopener" href="https://flutter.io/">https://flutter.io/</a><br>Mobile开发框架，才preview 1.类似RN，谨慎看好<br>flutter</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/25/180625_twelve/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-180329_eleven" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -616,313 +929,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/12/04/171204_seven/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-171104_six" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/04/171104_six/">JVM 理解</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/04/171104_six/" class="archive-article-date">
-  	<time datetime="2017-11-04T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="自动内存管理"><a href="#自动内存管理" class="headerlink" title="自动内存管理"></a>自动内存管理</h3><h4 id="内存区域"><a href="#内存区域" class="headerlink" title="内存区域"></a>内存区域</h4><ul>
-<li><p>程序计数器 Program Counter Register<br>执行Java方法，记录当前指令的地址。执行natvie方法，为空</p>
-        
-          <a class="article-more-a" href="/2017/11/04/171104_six/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/04/171104_six/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-171024_five" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/24/171024_five/">用openCV在Android上实现图片模糊检测</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/24/171024_five/" class="archive-article-date">
-  	<time datetime="2017-10-24T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>实现方式较为简单，拍照后点击按钮进行检测，下方文本框显示检查结果</p>
-<p><img src="../images/old/five_1.png" alt="1"></p>
-<p><img src="../images/old/five_2.png" alt="2"></p>
-        
-          <a class="article-more-a" href="/2017/10/24/171024_five/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/24/171024_five/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-171024_four_2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/24/171024_four_2/">图像相关处理</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/24/171024_four_2/" class="archive-article-date">
-  	<time datetime="2017-10-24T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="图像灰度化"><a href="#图像灰度化" class="headerlink" title="图像灰度化"></a>图像灰度化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public Bitmap bitmap2Gray(Bitmap bitmap)&#123;</span><br><span class="line">  int width &#x3D; bitmap.getWidth();</span><br><span class="line">  int height &#x3D; bitmap.getHeight();</span><br><span class="line">  &#x2F;&#x2F;目标灰度图片</span><br><span class="line">  Bitmap bmpGray &#x3D; Bitmap.createBitmap(width,height,Bitmap.Config.RGB_565);</span><br><span class="line">  Canvas canvas &#x3D; new Canvas(bmpGray);</span><br><span class="line">  Paint paint &#x3D; new Paint();</span><br><span class="line">  ColorMatrix cm &#x3D; new ColorMatrix();</span><br><span class="line">  cm.setSaturation(0);</span><br><span class="line">  ColorMatrixColorFilter f &#x3D; new ColorMatrixColorFilter(cm);</span><br><span class="line">  paint.setColorFilter(f);</span><br><span class="line">  canvas.drawBitmap(bitmap,0,0,paint);</span><br><span class="line">  return bmpGray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/10/24/171024_four_2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/24/171024_four_2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-171012_four" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/12/171012_four/">Android 的权限 UID,GID,PID 简介</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/12/171012_four/" class="archive-article-date">
-  	<time datetime="2017-10-12T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="UID分类"><a href="#UID分类" class="headerlink" title="UID分类"></a>UID分类</h3><p>根用户：root账户， 属于UID，默认编号0<br>系统用户，属于UID，一般是系统保留编号，1~499<br>普通用户，属于UID，默认编号从500开始</p>
-        
-          <a class="article-more-a" href="/2017/10/12/171012_four/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/12/171012_four/">展开全文 >></a>
         </p>
       
 
