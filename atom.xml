@@ -230,23 +230,6 @@
     <author>
       <name>fcrab</name>
     </author>
-    <category term="ai" scheme="https://fcrab.github.io/tags/ai/"/>
-    <content>
-      <![CDATA[<h2 id="开个新坑"><a href="#开个新坑" class="headerlink" title="开个新坑"></a>开个新坑</h2><p>aigc的浪潮已经肉眼可见的到来了。不管你愿不愿意，它都会影响到你<br>因此，这是我从业10数年来必须面对的一个5级风暴，毫不犹豫地跳进它，认识它，看看它对自己的生活能产生怎样的影响</p><h2 id="一些基本概念"><a href="#一些基本概念" class="headerlink" title="一些基本概念"></a>一些基本概念</h2><h2 id="prompt-教程"><a href="#prompt-教程" class="headerlink" title="prompt 教程"></a>prompt 教程</h2><h2 id="sd部署"><a href="#sd部署" class="headerlink" title="sd部署"></a>sd部署</h2>]]>
-    </content>
-    <id>https://fcrab.github.io/2023/06/09/230609_ai1/</id>
-    <link href="https://fcrab.github.io/2023/06/09/230609_ai1/"/>
-    <published>2023-06-09T06:17:00.000Z</published>
-    <summary>
-      <![CDATA[<h2 id="开个新坑"><a href="#开个新坑" class="headerlink"]]>
-    </summary>
-    <title>跳入AIGC的潮水里</title>
-    <updated>2026-11-09T09:09:46.060Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>fcrab</name>
-    </author>
     <category term="note" scheme="https://fcrab.github.io/tags/note/"/>
     <content>
       <![CDATA[<h2 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h2><p>本来以为我会在这个tag里面写一些生活片段，会有一些出游的片段，会有我学会拍照后拍到的帅气的场景<br>但事与愿违，无论是身体条件，还是赚钱的能力，这几年的疫情，都生动地刻画了一个年轻人直面自己成为一个再普通不过的中年人过程<br>还好，我仍对生活抱有期待，对这里以后的内容我也抱有期待</p>]]>
@@ -258,6 +241,23 @@
       <![CDATA[<h2 id="碎碎念"><a href="#碎碎念" class="headerlink"]]>
     </summary>
     <title>只是为了不让tag空着</title>
+    <updated>2026-11-09T09:09:46.060Z</updated>
+  </entry>
+  <entry>
+    <author>
+      <name>fcrab</name>
+    </author>
+    <category term="ai" scheme="https://fcrab.github.io/tags/ai/"/>
+    <content>
+      <![CDATA[<h2 id="开个新坑"><a href="#开个新坑" class="headerlink" title="开个新坑"></a>开个新坑</h2><p>aigc的浪潮已经肉眼可见的到来了。不管你愿不愿意，它都会影响到你<br>因此，这是我从业10数年来必须面对的一个5级风暴，毫不犹豫地跳进它，认识它，看看它对自己的生活能产生怎样的影响</p><h2 id="一些基本概念"><a href="#一些基本概念" class="headerlink" title="一些基本概念"></a>一些基本概念</h2><h2 id="prompt-教程"><a href="#prompt-教程" class="headerlink" title="prompt 教程"></a>prompt 教程</h2><h2 id="sd部署"><a href="#sd部署" class="headerlink" title="sd部署"></a>sd部署</h2>]]>
+    </content>
+    <id>https://fcrab.github.io/2023/06/09/230609_ai1/</id>
+    <link href="https://fcrab.github.io/2023/06/09/230609_ai1/"/>
+    <published>2023-06-09T06:17:00.000Z</published>
+    <summary>
+      <![CDATA[<h2 id="开个新坑"><a href="#开个新坑" class="headerlink"]]>
+    </summary>
+    <title>跳入AIGC的潮水里</title>
     <updated>2026-11-09T09:09:46.060Z</updated>
   </entry>
   <entry>
