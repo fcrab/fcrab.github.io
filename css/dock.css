@@ -74,6 +74,18 @@ html[data-dock="collapsed"] .left-col .header-nav .social .s-theme .tip {
 }
 .left-col .header-nav .social .s-theme:hover { color: #a97d2e; border-color: #a97d2e; opacity: 1; }
 .left-col .header-nav .social .s-theme svg { width: 14px; height: 14px; }
+/* ---------- 主题钮图标三形随态换形（第四波） ----------
+   图形 = 当前态：auto 半日半月 / light 太阳（feather sun）/ dark 月亮。
+   三形全量内联于 .js-theme-toggle 的 svg（ti-auto / ti-light / ti-dark 三组），
+   html[data-mode] 由 head.ejs 防闪烁脚本在 CSS 解析前落位（首屏即正确图形），
+   theme.js apply() 每次轮转重设 data-mode 即时换形，桌面/移动两钮同 class 同步；
+   data-mode 缺失或异常值（如禁 JS）按 auto 半日半月兜底显示。 */
+.js-theme-toggle .ti-light,
+.js-theme-toggle .ti-dark { display: none; }
+html[data-mode="light"] .js-theme-toggle .ti-auto,
+html[data-mode="dark"] .js-theme-toggle .ti-auto { display: none; }
+html[data-mode="light"] .js-theme-toggle .ti-light,
+html[data-mode="dark"] .js-theme-toggle .ti-dark { display: inline; }
 .left-col .header-nav .social .dock-new {
   position: absolute; top: -7px; right: -9px; z-index: 2;
   background: #e8c37e; color: #4a3813;
