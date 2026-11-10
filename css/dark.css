@@ -3,7 +3,7 @@
  *
  * 设计稿：blog-modernization/index.html 视图③（#v3 亮暗对照表为唯一色值真源）
  * 机制：html[data-dark] 由防闪烁内联脚本（head.ejs）与 theme.js 维护；
- *       yilia.theme=auto|light|dark：未动过 auto 跟随系统，人工切换写入显式值。
+ *       yilia.theme=auto|light|dark 三态轮转，auto 时跟随系统。
  * 主色 #4d4d4d 一字不改——暗色 hero #1f1b17 是它的衍生压深值（设计稿定稿）。
  * 亮→暗 token：bg #fff→#2b2620；panel #fff→#332d27；hero→#1f1b17；
  *   text #333→#ddd6cc；text-2 #696969→#b9b0a5；text-3 #999→#8d8479；
@@ -273,19 +273,9 @@ html[data-dark] .left-col .tip::before {
 html[data-dark] .left-col .dock-sub {
   border-top-color: #38322b;
 }
-html[data-dark] .left-col .dock-theme-row .dock-switch-label,
+html[data-dark] .left-col .dock-theme-word,
 html[data-dark] .left-col .dock-copyright {
   color: #6f675e;
-}
-/* 深浅色开关暗色态：轨道 #453e36，选中（深色位）转沙金，旋钮转暖炭 */
-html[data-dark] .left-col .dock-switch .dock-knob {
-  background: #453e36;
-}
-html[data-dark] .left-col .dock-switch input:checked + .dock-knob {
-  background: #e8c37e;
-}
-html[data-dark] .left-col .dock-switch input:checked + .dock-knob::after {
-  background: #2b2620;
 }
 
 /* ---------- #container.show 顶部渐变条（head 内联 style 后加载，需 !important 压制） ---------- */

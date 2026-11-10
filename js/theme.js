@@ -1,22 +1,26 @@
 /**
- * theme.js —— 深浅色显式开关（两点位 light / dark）
+ * theme.js —— 亮暗主题三态（auto / light / dark）· 图标轮转 + 释义实时同步
  *
- * 第三波改造：原「主题 · 跟随系统」三态循环文案与交互废弃。
- * - localStorage["yilia.theme"] = auto | light | dark：访客未动过 = auto（跟随系统，
- *   保留为初始态）；访客任何一次切换立即写入显式 light|dark 并持久化
- * - html[data-mode] 记用户意图；html[data-dark] 记生效结果（显式值或 auto+系统暗），
+ * 工单沿革：第三波原令「图标换 switch」已于 2026-11-10 14:52 撤回——月亮图标
+ * 三态轮转保留原样；真正要修的是切换后 tooltip/aria-label 释义不随状态更新
+ * （写死「跟随系统」）。本版为按新令的实现：
+ * - localStorage["yilia.theme"] = auto | light | dark，循环切换：auto → light → dark → auto
+ * - 释义（当前态）实时同步四处，每次 apply()（含初始、轮转、系统切换）立即刷新：
+ *     .js-theme-tip（dock 图标 tooltip）、.js-theme-label（侧栏底部主题词）、
+ *     .js-theme-toggle 的 title 与 aria-label（桌面月亮钮 + 移动顶栏钮）
+ * - html[data-mode] 记用户意图；html[data-dark] 记生效结果（dark 或 auto+系统暗），
  *   head.ejs 防闪烁内联脚本在 CSS 解析前先做同样赋值
  * - auto 态监听 prefers-color-scheme 变化实时跟随
- * - 控件两形态：
- *   1) .js-theme-toggle（dock 社交行月亮钮 + 移动顶栏钮）：点击深浅互切
- *   2) .js-theme-switch（展开侧栏底部 iOS 式开关，dock.css 渲染）：checked=深色
- * - 文案：深浅色 · 当前深色 / 深浅色 · 当前浅色（tooltip 与 aria 同步）
+ * - 文案：主题 · 跟随系统 / 主题 · 浅色 / 主题 · 深色
+ * 绑定目标：.js-theme-toggle（桌面侧栏 s-theme 按钮 + 移动顶栏 m-theme 按钮）。
  * 本文件为直写产物（source/js/），source-src/js/theme.js 为源镜像。ES5 书写。
  */
 (function () {
   'use strict';
 
   var KEY = 'yilia.theme';
+  var ORDER = ['auto', 'light', 'dark'];
+  var LABEL = { auto: '主题 · 跟随系统', light: '主题 · 浅色', dark: '主题 · 深色' };
 
   function storeGet() {
     try {
@@ -32,15 +36,16 @@
     return !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
   }
 
-  /* 生效主题：显式值优先，auto 跟随系统 */
-  function effective() {
+  /* 生效结果：显式值优先，auto 跟随系统 */
+  function effectiveDark() {
     var mode = storeGet();
-    return (mode === 'dark' || (mode === 'auto' && sysDark())) ? 'dark' : 'light';
+    return mode === 'dark' || (mode === 'auto' && sysDark());
   }
 
+  /* 每次状态落定都全量刷新：data-mode/data-dark + 四处释义 */
   function apply() {
     var mode = storeGet();
-    var dark = effective() === 'dark';
+    var dark = effectiveDark();
     var html = document.documentElement;
     html.setAttribute('data-mode', mode);
     if (dark) {
@@ -48,29 +53,23 @@
     } else {
       html.removeAttribute('data-dark');
     }
-    var word = '深浅色 · 当前' + (dark ? '深色' : '浅色');
+    var word = LABEL[mode];
     var tips = document.querySelectorAll('.js-theme-tip');
     for (var i = 0; i < tips.length; i++) tips[i].textContent = word;
+    var labels = document.querySelectorAll('.js-theme-label');
+    for (var j = 0; j < labels.length; j++) labels[j].textContent = word;
     var btns = document.querySelectorAll('.js-theme-toggle');
-    for (var j = 0; j < btns.length; j++) {
-      btns[j].setAttribute('title', word);
-      btns[j].setAttribute('aria-label', word);
-      btns[j].setAttribute('aria-pressed', dark ? 'true' : 'false');
-    }
-    var sws = document.querySelectorAll('.js-theme-switch');
-    for (var k = 0; k < sws.length; k++) {
-      sws[k].checked = dark;
-      sws[k].setAttribute('aria-label', word);
+    for (var k = 0; k < btns.length; k++) {
+      btns[k].setAttribute('title', word);
+      btns[k].setAttribute('aria-label', word);
     }
   }
 
-  /* 显式写入：任何一次人工切换都脱离 auto，落为 light|dark */
-  function setExplicit(v) {
-    storeSet(v);
+  /* 三态轮转：auto → light → dark → auto，轮转后释义立即刷新 */
+  function cycle() {
+    var next = ORDER[(ORDER.indexOf(storeGet()) + 1) % ORDER.length];
+    storeSet(next);
     apply();
-  }
-  function toggle() {
-    setExplicit(effective() === 'dark' ? 'light' : 'dark');
   }
 
   function init() {
@@ -81,17 +80,9 @@
         btn.addEventListener('click', function (e) {
           e.preventDefault();
           e.stopPropagation();
-          toggle();
+          cycle();
         });
       })(btns[i]);
-    }
-    var sws = document.querySelectorAll('.js-theme-switch');
-    for (var n = 0; n < sws.length; n++) {
-      (function (sw) {
-        sw.addEventListener('change', function () {
-          setExplicit(sw.checked ? 'dark' : 'light');
-        });
-      })(sws[n]);
     }
     if (window.matchMedia) {
       var mq = window.matchMedia('(prefers-color-scheme: dark)');
