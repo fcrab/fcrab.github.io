@@ -5,18 +5,18 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://example.com">
+  <link rel="dns-prefetch" href="https://fcrab.github.io">
   <title>Android 动态权限附加信息 | fcs cave</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="功能简介华为在自己的审核机制里面加入了新的要求，在申请权限的时候附加更详细的介绍信息。并且附带了一张示例 [] 方案一般来说实现弹窗有以下几种常见方式:toast,snackbar,dialog,windowManager.addView。能够显示在其他应用上的显示方式只有toast和悬浮窗这两种，由于权限限制，悬浮窗需要向用户请求相应权限，并跳转系统设置页面做修改，因此比较难以获得。因而本文重点">
+  <meta name="description" content="功能简介华为在自己的审核机制里面加入了新的要求，在申请权限的时候附加更详细的介绍信息。并且附带了一张示例 []  方案一般来说实现弹窗有以下几种常见方式:toast,snackbar,dialog,windowManager.addView。能够显示在其他应用上的显示方式只有toast和悬浮窗这两种，由于权限限制，悬浮窗需要向用户请求相应权限，并跳转系统设置页面做修改，因此比较难以获得。因而本文重">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 动态权限附加信息">
-<meta property="og:url" content="http://example.com/2024/01/09/240109_android_permission_tip/index.html">
+<meta property="og:url" content="https://fcrab.github.io/2024/01/09/240109_android_permission_tip/index.html">
 <meta property="og:site_name" content="fcs cave">
-<meta property="og:description" content="功能简介华为在自己的审核机制里面加入了新的要求，在申请权限的时候附加更详细的介绍信息。并且附带了一张示例 [] 方案一般来说实现弹窗有以下几种常见方式:toast,snackbar,dialog,windowManager.addView。能够显示在其他应用上的显示方式只有toast和悬浮窗这两种，由于权限限制，悬浮窗需要向用户请求相应权限，并跳转系统设置页面做修改，因此比较难以获得。因而本文重点">
+<meta property="og:description" content="功能简介华为在自己的审核机制里面加入了新的要求，在申请权限的时候附加更详细的介绍信息。并且附带了一张示例 []  方案一般来说实现弹窗有以下几种常见方式:toast,snackbar,dialog,windowManager.addView。能够显示在其他应用上的显示方式只有toast和悬浮窗这两种，由于权限限制，悬浮窗需要向用户请求相应权限，并跳转系统设置页面做修改，因此比较难以获得。因而本文重">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-01-09T09:44:10.000Z">
-<meta property="article:modified_time" content="2024-03-28T15:10:21.209Z">
+<meta property="article:modified_time" content="2026-11-09T09:09:46.062Z">
 <meta property="article:author" content="fcrab">
 <meta property="article:tag" content="dev">
 <meta name="twitter:card" content="summary">
@@ -37,7 +37,7 @@
 
   
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body>
   <div id="container" q-class="show:isCtnShow">
@@ -186,7 +186,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="功能简介"><a href="#功能简介" class="headerlink" title="功能简介"></a>功能简介</h2><pre><code>华为在自己的审核机制里面加入了新的要求，在申请权限的时候附加更详细的介绍信息。并且附带了一张示例
-[]</code></pre>
+[]
+</code></pre>
 <h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>一般来说实现弹窗有以下几种常见方式:<br><code>toast</code>,<code>snackbar</code>,<code>dialog</code>,<code>windowManager.addView</code>。能够显示在其他应用上的显示方式只有<code>toast</code>和悬浮窗这两种，由于权限限制，悬浮窗需要向用户请求相应权限，并跳转系统设置页面做修改，因此比较难以获得。因而本文重点讨论toast和dialog等形式的实现异同</p>
 <ul>
 <li><p>toast</p>
@@ -197,7 +198,7 @@
   <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//dialog with system permission</span></span><br><span class="line">    <span class="keyword">val</span> dialog = PermissionTipsDialog(context,tips)</span><br><span class="line">    <span class="keyword">val</span> attributes = dialog.window?.attributes</span><br><span class="line">    dialog.window?.decorView?.setPadding(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    attributes?.gravity = Gravity.TOP</span><br><span class="line"></span><br><span class="line">    attributes?.width = WindowManager.LayoutParams.MATCH_PARENT</span><br><span class="line">    attributes?.height = WindowManager.LayoutParams.WRAP_CONTENT</span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) &#123;</span><br><span class="line">        attributes?.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        attributes?.type = WindowManager.LayoutParams.TYPE_PRIORITY_PHONE</span><br><span class="line">    &#125;</span><br><span class="line">    dialog.window?.attributes = attributes</span><br><span class="line">    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))</span><br><span class="line">    dialog.show()</span><br></pre></td></tr></table></figure>
 <p>  增加以下权限<br>  <code>&lt;uses-permission android:name=&quot;android.permission.SYSTEM_ALERT_WINDOW&quot;/&gt;</code></p>
 <p>  在Android O后该权限被控制，需要申请悬浮窗权限</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent &#x3D; new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);</span><br><span class="line">intent.setData(Uri.parse(&quot;package:&quot; + getPackageName()));</span><br><span class="line">startActivityForResult(intent, 100);</span><br></pre></td></tr></table></figure></li>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);</span><br><span class="line">intent.setData(Uri.parse(&quot;package:&quot; + getPackageName()));</span><br><span class="line">startActivityForResult(intent, 100);</span><br></pre></td></tr></table></figure></li>
 <li><p>wms addview</p>
 </li>
 </ul>
@@ -270,7 +271,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/01/09/240109_android_permission_tip/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://fcrab.github.io/2024/01/09/240109_android_permission_tip/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -338,7 +339,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2024 fcrab
+    		&copy; 2026 fcrab
     	</div>
 		总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次
       	<div class="footer-right">
