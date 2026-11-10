@@ -81,10 +81,36 @@ html[data-dock="collapsed"] .left-col .header-nav .social .s-theme .tip {
   padding: 2px 4px; border-radius: 7px;
 }
 
-/* ---------- 主题词 / 版权（展开态，钉在侧栏底部；.left-col 为 fixed 即包含块） ---------- */
-.left-col .dock-theme-word {
-  position: absolute; bottom: 36px; left: 0; width: 100%; margin: 0;
-  text-align: center; font-size: 11px; color: #a8a8a8; letter-spacing: .02em;
+/* ---------- 主题词 / 版权（展开态，钉在侧栏底部；.left-col 为 fixed 即包含块） ----------
+   主题词原为「主题 · 跟随系统」文本，第三波改为显式深浅色 iOS 式开关行 */
+.left-col .dock-theme-row {
+  position: absolute; bottom: 34px; left: 0; width: 100%; margin: 0;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.left-col .dock-switch-label {
+  font-size: 11px; color: #a8a8a8; letter-spacing: .02em; line-height: 20px;
+}
+.left-col .dock-switch {
+  position: relative; display: inline-block; width: 34px; height: 20px; cursor: pointer;
+}
+.left-col .dock-switch input {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  margin: 0; opacity: 0; cursor: pointer; z-index: 2;
+}
+.left-col .dock-switch .dock-knob {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 10px; background: #d9d4cc;
+  transition: background .2s ease;
+}
+.left-col .dock-switch .dock-knob::after {
+  content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px;
+  border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+  transition: transform .2s cubic-bezier(.42, 0, .58, 1);
+}
+.left-col .dock-switch input:checked + .dock-knob { background: #4d4d4d; }
+.left-col .dock-switch input:checked + .dock-knob::after { transform: translateX(14px); }
+.left-col .dock-switch input:focus-visible + .dock-knob {
+  outline: 2px solid #a97d2e; outline-offset: 1px;
 }
 .left-col .dock-copyright {
   position: absolute; bottom: 14px; left: 0; width: 100%; margin: 0;
@@ -151,11 +177,19 @@ html[data-dock="collapsed"] .left-col .header-nav .social .s-theme {
 }
 html[data-dock="collapsed"] .left-col .header-nav .social .s-theme svg { width: 18px; height: 18px; }
 html[data-dock="collapsed"] .left-col .header-nav .social .dock-new { top: 0; right: 20px; padding: 1px 3px; }
-html[data-dock="collapsed"] .left-col .dock-theme-word,
+html[data-dock="collapsed"] .left-col .dock-theme-row,
 html[data-dock="collapsed"] .left-col .dock-copyright { display: none; }
 html[data-dock="collapsed"] .mid-col { left: 64px; }
 /* 次级面板（所有文章/关于我）收起态从 Dock 右侧滑出，不被 64px 侧栏压住 */
 html[data-dock="collapsed"] .tools-col.show { left: 64px; }
+
+/* ---------- 隐形滑出面板放行事件（收起态滚动死区修复） ----------
+   .tools-col（所有文章/关于我 的左滑面板）隐藏态原设计仅 opacity:0——盒子仍
+   position:fixed 占 300×100%，此前被展开态 300px 侧栏完全盖住无事；Dock 收起后
+   x∈[64,300] 竖条暴露，其 .tools-wrap 有 overflow-y:auto，滚轮被它吃掉，
+   形成"透明遮罩"式滚动死区。隐藏态 pointer-events:none 放行，.show 恢复。 */
+.tools-col { pointer-events: none; }
+.tools-col.show { pointer-events: auto; }
 
 /* ==========================================================================
    ≤800px：顶栏 + 左滑抽屉 + 遮罩

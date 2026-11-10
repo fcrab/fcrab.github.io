@@ -112,13 +112,16 @@
 					<a class="rss" target="_blank" href="/atom.xml" title="rss"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5.2" cy="18.8" r="1.6" fill="currentColor" stroke="none"/></svg><span class="dock-new">NEW</span><span class="tip">RSS 订阅 · /atom.xml</span></a>
 					
 		        
-				<button class="s-theme js-theme-toggle" aria-label="切换主题"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg><span class="tip js-theme-tip">主题 · 跟随系统</span></button>
+				<button class="s-theme js-theme-toggle" aria-label="深浅色"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg><span class="tip js-theme-tip">深浅色 · 当前浅色</span></button>
 			</div>
 		</nav>
 	</header>
 </div>
 
-<p class="dock-theme-word js-theme-label">主题 · 跟随系统</p>
+<div class="dock-theme-row">
+	<label class="dock-switch-label" for="dock-theme-switch">深浅色</label>
+	<span class="dock-switch"><input type="checkbox" id="dock-theme-switch" class="js-theme-switch"><span class="dock-knob" aria-hidden="true"></span></span>
+</div>
 <p class="dock-copyright">2026 · 望舒</p>
 <button class="dock-handle js-dock-toggle" aria-expanded="true" title="收起侧栏">
 	<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m14.5 5-6 7 6 7"/></svg>
@@ -132,7 +135,7 @@
 	<div class="m-topbar">
 		<button class="m-burger js-drawer-open" aria-label="打开菜单"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 		<span class="m-brand">fcs cave</span>
-		<button class="m-theme js-theme-toggle" aria-label="切换主题"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg></button>
+		<button class="m-theme js-theme-toggle" aria-label="深浅色" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg></button>
 	</div>
 	<div class="m-mask js-drawer-close"></div>
 	<div class="m-drawer">
@@ -253,82 +256,6 @@
 
 
   
-    <article id="post-171024_four_2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/24/171024_four_2/">图像相关处理</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/24/171024_four_2/" class="archive-article-date">
-  	<time datetime="2017-10-24T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="图像灰度化"><a href="#图像灰度化" class="headerlink" title="图像灰度化"></a>图像灰度化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">public Bitmap bitmap2Gray(Bitmap bitmap)&#123;<br>  int width = bitmap.getWidth();<br>  int height = bitmap.getHeight();<br>  //目标灰度图片<br>  Bitmap bmpGray = Bitmap.createBitmap(width,height,Bitmap.Config.RGB_565);<br>  Canvas canvas = new Canvas(bmpGray);<br>  Paint paint = new Paint();<br>  ColorMatrix cm = new ColorMatrix();<br>  cm.setSaturation(0);<br>  ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);<br>  paint.setColorFilter(f);<br>  canvas.drawBitmap(bitmap,0,0,paint);<br>  return bmpGray;<br>&#125;<br></code></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/10/24/171024_four_2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/24/171024_four_2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-171024_five" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -378,6 +305,82 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/10/24/171024_five/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-171024_four_2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/24/171024_four_2/">图像相关处理</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/24/171024_four_2/" class="archive-article-date">
+  	<time datetime="2017-10-24T15:37:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="图像灰度化"><a href="#图像灰度化" class="headerlink" title="图像灰度化"></a>图像灰度化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">public Bitmap bitmap2Gray(Bitmap bitmap)&#123;<br>  int width = bitmap.getWidth();<br>  int height = bitmap.getHeight();<br>  //目标灰度图片<br>  Bitmap bmpGray = Bitmap.createBitmap(width,height,Bitmap.Config.RGB_565);<br>  Canvas canvas = new Canvas(bmpGray);<br>  Paint paint = new Paint();<br>  ColorMatrix cm = new ColorMatrix();<br>  cm.setSaturation(0);<br>  ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);<br>  paint.setColorFilter(f);<br>  canvas.drawBitmap(bitmap,0,0,paint);<br>  return bmpGray;<br>&#125;<br></code></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/10/24/171024_four_2/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/24/171024_four_2/">展开全文 >></a>
         </p>
       
 
@@ -781,15 +784,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ai</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">note</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ee</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ai</a>
               </li>
             
             <div class="clearfix"></div>

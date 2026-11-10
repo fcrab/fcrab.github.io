@@ -1,43 +1,66 @@
+/*
+ * highlight-yilia.scss —— 代码高亮升级源镜像（与 ../source/css/highlight-yilia.css 内容一致）
+ *
+ * 主题 webpack 链已损坏（themes/yilia/node_modules 缺失，npm audit 亦有多条旧 webpack 告警），
+ * 当前编译产物 themes/yilia/source/css/highlight-yilia.css 为直写维护；
+ * 若日后修复构建链，请将本文件加入 webpack.config.js 入口后重新编译，
+ * 并与直写产物保持同步。
+ *
+ * 设计稿：blog-modernization/index.html 视图②；色板取自主题既有色（沙金/浅蓝/头像蓝/玫瑰/橙/暖灰）。
+ * 第三波改造：代码块配色接入主题开关——
+ *   基座规则 = 浅色主题（暖纸浅色码块 + 同色系加深的高亮）；
+ *   html[data-dark] 覆盖 = 深色主题（原「亮暗共用」的暖炭深色码块原值原样迁入）。
+ *   跟随系统初始态由 head.ejs 防闪烁脚本先行落 data-dark，本文件随生效主题渲染。
+ */
+
 /**
  * highlight-yilia —— 代码高亮升级（yilia warm 色板）
  *
- * 设计稿：blog-modernization/index.html 视图②（唯一视觉真源）
  * 基座：Hexo highlight（_config.yml highlight.hljs: true），hljs-* 类名
- * 色板全部取自主题既有色：
- *   keyword  #e8c37e 沙金   ← slider 渐变
- *   string   #a0cfe4 浅蓝   ← slider 渐变
- *   title    #88acdb 头像蓝 ← profilepic
- *   type     #cf9fb8 玫瑰   ← hover 色 #B0A0AA 提亮
- *   number   #ef7522 橙     ← rss 品牌色
- *   comment  #8a8177 暖灰斜体
- *   meta     #cf9fb8
- *   attr     #ddd6cc
+ * 色板全部取自主题既有色（深色态）及其浅色态加深衍生：
+ *   深色态（html[data-dark]，沿用上线原值）
+ *     keyword  #e8c37e 沙金   ← slider 渐变
+ *     string   #a0cfe4 浅蓝   ← slider 渐变
+ *     title    #88acdb 头像蓝 ← profilepic
+ *     type     #cf9fb8 玫瑰   ← hover 色 #B0A0AA 提亮
+ *     number   #ef7522 橙     ← rss 品牌色
+ *     comment  #8a8177 暖灰斜体
+ *     meta     #cf9fb8
+ *     attr     #ddd6cc
+ *   浅色态（基座，同色相加深保证浅底可读）
+ *     keyword  #9a6d10 / string #38789f / title #3f6ea3 / type #a05677
+ *     number   #bf5711 / comment #8f867a / attr #56504a / 正文 #46403a
+ *     码块底   #f4eee3 暖纸 / 头栏 #ece4d6 / 行号 #b3a99a
  * 注意：本文件为直写编译产物（themes/yilia/source/css/），
  * source-src/css/ 下有同名 .scss 源镜像；主题 webpack 链已损坏
  * （node_modules 缺失），修复后需将本文件加入构建入口。
  */
 
-/* ---------- 代码块基座：暖纸上的墨色块 ---------- */
+/* ==========================================================================
+   基座 = 浅色主题：暖纸浅色码块
+   ========================================================================== */
+
+/* ---------- 代码块基座 ---------- */
 .article-entry .highlight {
   margin: 26px 0 30px;
   border-radius: 6px;
   overflow: hidden;
-  background: #2a2622; /* 亮暗共用 */
+  background: #f4eee3;
 }
 /* Monokai 底色与旧 padding 全部接管 */
 .article-entry pre,
 .article-entry .highlight pre {
-  background: #2a2622;
+  background: #f4eee3;
   margin: 0;
   padding: 15px 18px;
   overflow-x: auto;
-  color: #ddd6cc;
+  color: #46403a;
   font-size: 13px;
   line-height: 1.65;
 }
 .article-entry pre code,
 .article-entry .highlight pre code {
-  color: #ddd6cc;
+  color: #46403a;
   font-size: 13px;
 }
 
@@ -46,7 +69,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #211d19;
+  background: #ece4d6;
   padding: 7px 14px;
   font-family: "Source Code Pro", Consolas, Monaco, Menlo, monospace;
   font-size: 11px;
@@ -54,7 +77,7 @@
   user-select: none;
 }
 .article-entry .highlight .code-head .fname {
-  color: #b9b0a5;
+  color: #6f675e;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -69,7 +92,7 @@
   font-size: 11px;
   color: #8a8177;
   background: none;
-  border: 1px solid #453e36;
+  border: 1px solid #d8cfbf;
   border-radius: 4px;
   padding: 1px 9px;
   cursor: pointer;
@@ -77,19 +100,19 @@
 }
 .article-entry .highlight .code-head .copy:hover,
 .article-entry .highlight .code-head .copy.flashed {
-  color: #e8c37e;
-  border-color: #e8c37e;
+  color: #9a6d10;
+  border-color: #9a6d10;
 }
 /* hexo caption 模式（文章内 ```[lang] caption 文案）也纳入头栏观感 */
 .article-entry .highlight figcaption {
-  background: #211d19;
+  background: #ece4d6;
   color: #8a8177;
   font-size: 11px;
   padding: 6px 14px;
   margin: 0;
 }
 .article-entry .highlight figcaption a {
-  color: #e8c37e;
+  color: #9a6d10;
   float: right;
 }
 
@@ -97,11 +120,11 @@
 .article-entry .highlight .gutter pre {
   text-align: right;
   padding: 15px 12px 15px 16px;
-  background: #2a2622;
-  color: #6f675e;
+  background: #f4eee3;
+  color: #b3a99a;
 }
 .article-entry .highlight .gutter pre .line {
-  color: #6f675e;
+  color: #b3a99a;
   text-shadow: none;
 }
 
@@ -114,30 +137,30 @@
   padding: .1em .4em;
 }
 
-/* ---------- hljs · yilia warm 五色 ---------- */
-/* 沙金 #e8c37e：关键字族 */
+/* ---------- hljs · 浅色态（yilia warm 同色相加深） ---------- */
+/* 深金 #9a6d10：关键字族 */
 .article-entry .hljs-keyword,
 .article-entry .hljs-selector-tag,
 .article-entry .hljs-selector-id,
 .article-entry .hljs-selector-class {
-  color: #e8c37e;
+  color: #9a6d10;
 }
-/* 浅蓝 #a0cfe4：字符串族 */
+/* 深青蓝 #38789f：字符串族 */
 .article-entry .hljs-string,
 .article-entry .hljs-regexp,
 .article-entry .hljs-addition,
 .article-entry .hljs-meta .hljs-string {
-  color: #a0cfe4;
+  color: #38789f;
 }
-/* 头像蓝 #88acdb：标题/函数/标签名 */
+/* 深头像蓝 #3f6ea3：标题/函数/标签名 */
 .article-entry .hljs-title,
 .article-entry .hljs-title.function_,
 .article-entry .hljs-title.class_,
 .article-entry .hljs-name,
 .article-entry .hljs-section {
-  color: #88acdb;
+  color: #3f6ea3;
 }
-/* 玫瑰 #cf9fb8：类型/元信息 */
+/* 深玫瑰 #a05677：类型/元信息 */
 .article-entry .hljs-type,
 .article-entry .hljs-built_in,
 .article-entry .hljs-meta,
@@ -145,32 +168,140 @@
 .article-entry .hljs-deletion,
 .article-entry .hljs-selector-attr,
 .article-entry .hljs-selector-pseudo {
-  color: #cf9fb8;
+  color: #a05677;
 }
-/* 橙 #ef7522：数字/常量族 */
+/* 深橙 #bf5711：数字/常量族 */
 .article-entry .hljs-number,
 .article-entry .hljs-literal,
 .article-entry .hljs-symbol,
 .article-entry .hljs-bullet,
 .article-entry .hljs-link,
 .article-entry .hljs-constant {
-  color: #ef7522;
+  color: #bf5711;
 }
 /* 暖灰斜体：注释族 */
 .article-entry .hljs-comment,
 .article-entry .hljs-quote {
-  color: #8a8177;
+  color: #8f867a;
   font-style: italic;
 }
-/* 正文色 #ddd6cc：属性/变量族（贴近正文，少即多） */
+/* 暖墨 #56504a：属性/变量族 */
 .article-entry .hljs-attr,
 .article-entry .hljs-attribute,
 .article-entry .hljs-variable,
 .article-entry .hljs-template-variable,
 .article-entry .hljs-property,
 .article-entry .hljs-params {
-  color: #ddd6cc;
+  color: #56504a;
 }
 /* 加粗语义 */
 .article-entry .hljs-strong { font-weight: bold; }
 .article-entry .hljs-emphasis { font-style: italic; }
+
+/* ==========================================================================
+   深色主题覆盖（html[data-dark]）：原「亮暗共用」暖炭深色码块原值迁入
+   ========================================================================== */
+
+/* ---------- 基座 ---------- */
+html[data-dark] .article-entry .highlight {
+  background: #2a2622;
+}
+html[data-dark] .article-entry pre,
+html[data-dark] .article-entry .highlight pre {
+  background: #2a2622;
+  color: #ddd6cc;
+}
+html[data-dark] .article-entry pre code,
+html[data-dark] .article-entry .highlight pre code {
+  color: #ddd6cc;
+}
+
+/* ---------- 文件名头栏 ---------- */
+html[data-dark] .article-entry .highlight .code-head {
+  background: #211d19;
+}
+html[data-dark] .article-entry .highlight .code-head .fname {
+  color: #b9b0a5;
+}
+html[data-dark] .article-entry .highlight .code-head .copy {
+  color: #8a8177;
+  border-color: #453e36;
+}
+html[data-dark] .article-entry .highlight .code-head .copy:hover,
+html[data-dark] .article-entry .highlight .code-head .copy.flashed {
+  color: #e8c37e;
+  border-color: #e8c37e;
+}
+html[data-dark] .article-entry .highlight figcaption {
+  background: #211d19;
+}
+html[data-dark] .article-entry .highlight figcaption a {
+  color: #e8c37e;
+}
+
+/* ---------- 行号列 ---------- */
+html[data-dark] .article-entry .highlight .gutter pre {
+  background: #2a2622;
+  color: #6f675e;
+}
+html[data-dark] .article-entry .highlight .gutter pre .line {
+  color: #6f675e;
+}
+
+/* ---------- hljs · 深色态（yilia warm 五色原值） ---------- */
+/* 沙金 #e8c37e：关键字族 */
+html[data-dark] .article-entry .hljs-keyword,
+html[data-dark] .article-entry .hljs-selector-tag,
+html[data-dark] .article-entry .hljs-selector-id,
+html[data-dark] .article-entry .hljs-selector-class {
+  color: #e8c37e;
+}
+/* 浅蓝 #a0cfe4：字符串族 */
+html[data-dark] .article-entry .hljs-string,
+html[data-dark] .article-entry .hljs-regexp,
+html[data-dark] .article-entry .hljs-addition,
+html[data-dark] .article-entry .hljs-meta .hljs-string {
+  color: #a0cfe4;
+}
+/* 头像蓝 #88acdb：标题/函数/标签名 */
+html[data-dark] .article-entry .hljs-title,
+html[data-dark] .article-entry .hljs-title.function_,
+html[data-dark] .article-entry .hljs-title.class_,
+html[data-dark] .article-entry .hljs-name,
+html[data-dark] .article-entry .hljs-section {
+  color: #88acdb;
+}
+/* 玫瑰 #cf9fb8：类型/元信息 */
+html[data-dark] .article-entry .hljs-type,
+html[data-dark] .article-entry .hljs-built_in,
+html[data-dark] .article-entry .hljs-meta,
+html[data-dark] .article-entry .hljs-doctag,
+html[data-dark] .article-entry .hljs-deletion,
+html[data-dark] .article-entry .hljs-selector-attr,
+html[data-dark] .article-entry .hljs-selector-pseudo {
+  color: #cf9fb8;
+}
+/* 橙 #ef7522：数字/常量族 */
+html[data-dark] .article-entry .hljs-number,
+html[data-dark] .article-entry .hljs-literal,
+html[data-dark] .article-entry .hljs-symbol,
+html[data-dark] .article-entry .hljs-bullet,
+html[data-dark] .article-entry .hljs-link,
+html[data-dark] .article-entry .hljs-constant {
+  color: #ef7522;
+}
+/* 暖灰斜体：注释族 */
+html[data-dark] .article-entry .hljs-comment,
+html[data-dark] .article-entry .hljs-quote {
+  color: #8a8177;
+  font-style: italic;
+}
+/* 正文色 #ddd6cc：属性/变量族 */
+html[data-dark] .article-entry .hljs-attr,
+html[data-dark] .article-entry .hljs-attribute,
+html[data-dark] .article-entry .hljs-variable,
+html[data-dark] .article-entry .hljs-template-variable,
+html[data-dark] .article-entry .hljs-property,
+html[data-dark] .article-entry .hljs-params {
+  color: #ddd6cc;
+}
