@@ -1,0 +1,176 @@
+/**
+ * highlight-yilia —— 代码高亮升级（yilia warm 色板）
+ *
+ * 设计稿：blog-modernization/index.html 视图②（唯一视觉真源）
+ * 基座：Hexo highlight（_config.yml highlight.hljs: true），hljs-* 类名
+ * 色板全部取自主题既有色：
+ *   keyword  #e8c37e 沙金   ← slider 渐变
+ *   string   #a0cfe4 浅蓝   ← slider 渐变
+ *   title    #88acdb 头像蓝 ← profilepic
+ *   type     #cf9fb8 玫瑰   ← hover 色 #B0A0AA 提亮
+ *   number   #ef7522 橙     ← rss 品牌色
+ *   comment  #8a8177 暖灰斜体
+ *   meta     #cf9fb8
+ *   attr     #ddd6cc
+ * 注意：本文件为直写编译产物（themes/yilia/source/css/），
+ * source-src/css/ 下有同名 .scss 源镜像；主题 webpack 链已损坏
+ * （node_modules 缺失），修复后需将本文件加入构建入口。
+ */
+
+/* ---------- 代码块基座：暖纸上的墨色块 ---------- */
+.article-entry .highlight {
+  margin: 26px 0 30px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #2a2622; /* 亮暗共用 */
+}
+/* Monokai 底色与旧 padding 全部接管 */
+.article-entry pre,
+.article-entry .highlight pre {
+  background: #2a2622;
+  margin: 0;
+  padding: 15px 18px;
+  overflow-x: auto;
+  color: #ddd6cc;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.article-entry pre code,
+.article-entry .highlight pre code {
+  color: #ddd6cc;
+  font-size: 13px;
+}
+
+/* ---------- 文件名头栏 ---------- */
+.article-entry .highlight .code-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #211d19;
+  padding: 7px 14px;
+  font-family: "Source Code Pro", Consolas, Monaco, Menlo, monospace;
+  font-size: 11px;
+  color: #8a8177;
+  user-select: none;
+}
+.article-entry .highlight .code-head .fname {
+  color: #b9b0a5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.article-entry .highlight .code-head .lang {
+  margin-left: auto;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.article-entry .highlight .code-head .copy {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  color: #8a8177;
+  background: none;
+  border: 1px solid #453e36;
+  border-radius: 4px;
+  padding: 1px 9px;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.article-entry .highlight .code-head .copy:hover,
+.article-entry .highlight .code-head .copy.flashed {
+  color: #e8c37e;
+  border-color: #e8c37e;
+}
+/* hexo caption 模式（文章内 ```[lang] caption 文案）也纳入头栏观感 */
+.article-entry .highlight figcaption {
+  background: #211d19;
+  color: #8a8177;
+  font-size: 11px;
+  padding: 6px 14px;
+  margin: 0;
+}
+.article-entry .highlight figcaption a {
+  color: #e8c37e;
+  float: right;
+}
+
+/* ---------- 行号列：退为暖灰 ---------- */
+.article-entry .highlight .gutter pre {
+  text-align: right;
+  padding: 15px 12px 15px 16px;
+  background: #2a2622;
+  color: #6f675e;
+}
+.article-entry .highlight .gutter pre .line {
+  color: #6f675e;
+  text-shadow: none;
+}
+
+/* ---------- 行内 code：浅纸色 ---------- */
+.article-entry p code,
+.article-entry li code {
+  background: #eeeeee;
+  border: none;
+  border-radius: 3px;
+  padding: .1em .4em;
+}
+
+/* ---------- hljs · yilia warm 五色 ---------- */
+/* 沙金 #e8c37e：关键字族 */
+.article-entry .hljs-keyword,
+.article-entry .hljs-selector-tag,
+.article-entry .hljs-selector-id,
+.article-entry .hljs-selector-class {
+  color: #e8c37e;
+}
+/* 浅蓝 #a0cfe4：字符串族 */
+.article-entry .hljs-string,
+.article-entry .hljs-regexp,
+.article-entry .hljs-addition,
+.article-entry .hljs-meta .hljs-string {
+  color: #a0cfe4;
+}
+/* 头像蓝 #88acdb：标题/函数/标签名 */
+.article-entry .hljs-title,
+.article-entry .hljs-title.function_,
+.article-entry .hljs-title.class_,
+.article-entry .hljs-name,
+.article-entry .hljs-section {
+  color: #88acdb;
+}
+/* 玫瑰 #cf9fb8：类型/元信息 */
+.article-entry .hljs-type,
+.article-entry .hljs-built_in,
+.article-entry .hljs-meta,
+.article-entry .hljs-doctag,
+.article-entry .hljs-deletion,
+.article-entry .hljs-selector-attr,
+.article-entry .hljs-selector-pseudo {
+  color: #cf9fb8;
+}
+/* 橙 #ef7522：数字/常量族 */
+.article-entry .hljs-number,
+.article-entry .hljs-literal,
+.article-entry .hljs-symbol,
+.article-entry .hljs-bullet,
+.article-entry .hljs-link,
+.article-entry .hljs-constant {
+  color: #ef7522;
+}
+/* 暖灰斜体：注释族 */
+.article-entry .hljs-comment,
+.article-entry .hljs-quote {
+  color: #8a8177;
+  font-style: italic;
+}
+/* 正文色 #ddd6cc：属性/变量族（贴近正文，少即多） */
+.article-entry .hljs-attr,
+.article-entry .hljs-attribute,
+.article-entry .hljs-variable,
+.article-entry .hljs-template-variable,
+.article-entry .hljs-property,
+.article-entry .hljs-params {
+  color: #ddd6cc;
+}
+/* 加粗语义 */
+.article-entry .hljs-strong { font-weight: bold; }
+.article-entry .hljs-emphasis { font-style: italic; }

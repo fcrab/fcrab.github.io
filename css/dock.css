@@ -1,0 +1,238 @@
+/* ==========================================================================
+   dock.css —— Dock 化侧栏 + 移动端左滑抽屉（第 1 项改造）
+   直写编译产物（主题 webpack 链损坏，node_modules 缺失；源镜像见 source-src/css/dock.scss）
+   视觉真源：/Users/fcc/mini1/designs/blog-modernization/index.html
+   规则：
+   - html[data-dock="expanded"|"collapsed"]（dock.js 维护，localStorage yilia.dock）
+   - html[data-drawer="open"|"closed"]（移动抽屉，dock.js 维护）
+   - 断点沿用主题既有 800px（设计稿 768px 统一上移，避免夹缝断裂）
+   - 展开态 width 300px ↔ 收起态 64px；hero 180px ↔ 52px；曲线 .25s cubic-bezier(.42,0,.58,1)
+   ========================================================================== */
+
+/* ---------- 桌面：隐藏移动端导航壳 ---------- */
+#mobile-nav { display: none; }
+
+/* ---------- Dock 把手（骑右缘） ---------- */
+.left-col .dock-handle {
+  position: absolute; top: 96px; right: -12px; z-index: 30;
+  width: 24px; height: 24px; border-radius: 50%; padding: 0;
+  background: #fff; border: 1px solid #dbdbdb;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .18);
+  display: flex; align-items: center; justify-content: center;
+  color: #999; cursor: pointer; font-family: inherit;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.left-col .dock-handle:hover { color: #a97d2e; border-color: #a97d2e; }
+.left-col .dock-handle svg { width: 12px; height: 12px; transition: transform .25s ease; }
+html[data-dock="collapsed"] .left-col .dock-handle svg { transform: rotate(180deg); }
+
+/* ---------- tooltip（右浮，收起态主用；social/主题按钮两态皆用） ---------- */
+.left-col .tip {
+  position: absolute; left: calc(100% + 14px); top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+  background: #4d4d4d; color: #fff;
+  font-size: 11.5px; letter-spacing: .05em; line-height: 1.4;
+  padding: 4px 10px; border-radius: 4px; white-space: nowrap;
+  opacity: 0; pointer-events: none; z-index: 40;
+  transition: opacity .15s ease .05s, transform .15s ease .05s;
+}
+.left-col .tip::before {
+  content: ""; position: absolute; right: 100%; top: 50%; margin-top: -4px;
+  border: 4px solid transparent; border-right-color: #4d4d4d;
+}
+.left-col .dock-handle:hover .tip,
+.left-col .header-nav .social a:hover .tip,
+.left-col .header-nav .social .s-theme:hover .tip,
+html[data-dock="collapsed"] .left-col .header-menu li a:hover .tip,
+html[data-dock="collapsed"] .left-col .dock-sub a:hover .tip {
+  opacity: 1; transform: translateY(-50%) translateX(0);
+}
+
+/* ---------- 菜单图标 / 标签 / 次级图标组：默认（展开态） ---------- */
+.left-col .header-menu li a { position: relative; }
+.left-col .header-menu .dock-ico { display: none; width: 19px; height: 19px; }
+.left-col .dock-sub { display: none; }
+
+/* ---------- 社交行新增元素 ---------- */
+.left-col .header-nav .social a { position: relative; }
+.left-col .header-nav .social a svg { width: 16px; height: 16px; }
+.left-col .header-nav .social .s-theme {
+  position: relative; width: 28px; height: 28px; border-radius: 50%; padding: 0;
+  margin: 0 8px 15px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: none; border: 1px solid #dbdbdb; color: #999; opacity: 1;
+  cursor: pointer; font-family: inherit; vertical-align: top;
+  transition: all .3s ease;
+}
+.left-col .header-nav .social .s-theme:hover { color: #a97d2e; border-color: #a97d2e; opacity: 1; }
+.left-col .header-nav .social .s-theme svg { width: 14px; height: 14px; }
+.left-col .header-nav .social .dock-new {
+  position: absolute; top: -7px; right: -9px; z-index: 2;
+  background: #e8c37e; color: #4a3813;
+  font-size: 8px; font-weight: 700; letter-spacing: .04em; line-height: 1;
+  padding: 2px 4px; border-radius: 7px;
+}
+
+/* ---------- 主题词 / 版权（展开态，钉在侧栏底部；.left-col 为 fixed 即包含块） ---------- */
+.left-col .dock-theme-word {
+  position: absolute; bottom: 36px; left: 0; width: 100%; margin: 0;
+  text-align: center; font-size: 11px; color: #a8a8a8; letter-spacing: .02em;
+}
+.left-col .dock-copyright {
+  position: absolute; bottom: 14px; left: 0; width: 100%; margin: 0;
+  text-align: center; font-size: 10.5px; color: #a8a8a8; opacity: .85; padding: 0 12px;
+  box-sizing: border-box;
+}
+
+/* ---------- 展开 ↔ 收起 过渡 ---------- */
+.left-col { transition: width .25s cubic-bezier(.42, 0, .58, 1); }
+.left-col .overlay { transition: height .25s cubic-bezier(.42, 0, .58, 1); }
+.left-col .intrude-less { transition: margin .25s cubic-bezier(.42, 0, .58, 1); }
+.left-col .profilepic { transition: all .25s cubic-bezier(.42, 0, .58, 1); }
+.left-col #header { transition: height .25s cubic-bezier(.42, 0, .58, 1); }
+.mid-col { transition: left .25s cubic-bezier(.42, 0, .58, 1); }
+
+/* ---------- 收起态（Dock） ---------- */
+html[data-dock="collapsed"] .left-col { width: 64px; }
+html[data-dock="collapsed"] .left-col .overlay { height: 52px; }
+html[data-dock="collapsed"] .left-col .intrude-less { width: 100%; margin: 20px auto 0; }
+html[data-dock="collapsed"] .left-col #header .profilepic { width: 40px; height: 40px; border-width: 3px; }
+html[data-dock="collapsed"] .left-col #header { height: auto; border-bottom: none; }
+html[data-dock="collapsed"] .left-col .header-author,
+html[data-dock="collapsed"] .left-col .header-subtitle,
+html[data-dock="collapsed"] .left-col .header-smart-menu,
+html[data-dock="collapsed"] .left-col .header-menu li a .dock-label { display: none; }
+html[data-dock="collapsed"] .left-col .header-menu { min-height: 0; margin: 10px 0 4px; }
+html[data-dock="collapsed"] .left-col .header-menu li a {
+  min-width: 0; width: 64px; height: 40px; font-size: 0; color: #999;
+  display: flex; align-items: center; justify-content: center;
+}
+html[data-dock="collapsed"] .left-col .header-menu li a:hover { color: #B0A0AA; }
+html[data-dock="collapsed"] .left-col .header-menu .dock-ico { display: block; }
+html[data-dock="collapsed"] .left-col .dock-sub {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  margin: 4px 16px 0; padding: 8px 0 10px; border-top: 1px solid #ececec;
+}
+html[data-dock="collapsed"] .left-col .dock-sub a {
+  position: relative; width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: #999; transition: color .15s ease;
+}
+html[data-dock="collapsed"] .left-col .dock-sub a:hover { color: #B0A0AA; }
+html[data-dock="collapsed"] .left-col .dock-sub a svg { width: 17px; height: 17px; }
+html[data-dock="collapsed"] .left-col .header-nav .social {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  margin: 12px 0 0; padding: 12px 0;
+}
+html[data-dock="collapsed"] .left-col .header-nav .social a {
+  width: 22px; height: 22px; margin: 0; background: none; border: none; opacity: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+html[data-dock="collapsed"] .left-col .header-nav .social a i { font-size: 16px; line-height: 1; }
+html[data-dock="collapsed"] .left-col .header-nav .social a.rss { background: none; border: none; color: #ef7522; }
+html[data-dock="collapsed"] .left-col .header-nav .social a.github { background: none; border: none; color: #afb6ca; }
+html[data-dock="collapsed"] .left-col .header-nav .social .s-theme {
+  width: 22px; height: 22px; margin: 0; border: none; background: none; color: #999;
+}
+html[data-dock="collapsed"] .left-col .header-nav .social .dock-new { top: -6px; right: -14px; padding: 1px 3px; }
+html[data-dock="collapsed"] .left-col .dock-theme-word,
+html[data-dock="collapsed"] .left-col .dock-copyright { display: none; }
+html[data-dock="collapsed"] .mid-col { left: 64px; }
+/* 次级面板（所有文章/关于我）收起态从 Dock 右侧滑出，不被 64px 侧栏压住 */
+html[data-dock="collapsed"] .tools-col.show { left: 64px; }
+
+/* ==========================================================================
+   ≤800px：顶栏 + 左滑抽屉 + 遮罩
+   ========================================================================== */
+@media (max-width: 800px) {
+  #mobile-nav {
+    display: block; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1001; pointer-events: none;
+  }
+  /* 顶栏 */
+  #mobile-nav .m-topbar {
+    position: absolute; top: 0; left: 0; right: 0; height: 44px; z-index: 3;
+    display: flex; align-items: center; gap: 8px; padding: 0 8px;
+    background: rgba(255, 255, 255, .92); border-bottom: 1px solid #ececec;
+    pointer-events: auto;
+  }
+  #mobile-nav .m-burger, #mobile-nav .m-theme {
+    width: 36px; height: 36px; padding: 0; border: none; background: none;
+    color: #333; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; flex: none;
+  }
+  #mobile-nav .m-burger svg, #mobile-nav .m-theme svg { width: 20px; height: 20px; }
+  #mobile-nav .m-theme svg { width: 16px; height: 16px; }
+  #mobile-nav .m-brand {
+    flex: 1; text-align: center; font-size: 14px; letter-spacing: .06em;
+    color: #333; font-family: Georgia, "Times New Roman", serif;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  /* 内容让出顶栏高度 */
+  body { padding-top: 44px; }
+  /* 遮罩 */
+  #mobile-nav .m-mask {
+    position: absolute; top: 44px; left: 0; right: 0; bottom: 0; z-index: 1;
+    background: rgba(0, 0, 0, .45); opacity: 0; pointer-events: none;
+    transition: opacity .26s ease;
+  }
+  html[data-drawer="open"] #mobile-nav .m-mask { opacity: 1; pointer-events: auto; }
+  /* 抽屉 */
+  #mobile-nav .m-drawer {
+    position: absolute; top: 44px; bottom: 0; left: 0; z-index: 2;
+    width: 78%; background: #fff;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .18);
+    transform: translateX(-104%);
+    transition: transform .26s cubic-bezier(.42, 0, .58, 1);
+    display: flex; flex-direction: column; overflow-y: auto;
+    pointer-events: auto; -webkit-overflow-scrolling: touch;
+  }
+  html[data-drawer="open"] #mobile-nav .m-drawer { transform: translateX(0); }
+  html[data-drawer="open"] body { overflow: hidden; }
+  /* 抽屉内部 */
+  #mobile-nav .m-close {
+    position: absolute; top: 8px; right: 10px; z-index: 3;
+    width: 28px; height: 28px; padding: 0; border: none; background: none;
+    color: rgba(255, 255, 255, .85); display: flex; align-items: center;
+    justify-content: center; cursor: pointer;
+  }
+  #mobile-nav .m-close svg { width: 14px; height: 14px; }
+  #mobile-nav .m-hero {
+    height: 96px; flex: none; display: flex; align-items: flex-end;
+    justify-content: center; position: relative;
+  }
+  #mobile-nav .m-avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    border: 3px solid #fff; background: #88acdb;
+    transform: translateY(28px); position: relative; z-index: 2; overflow: hidden;
+  }
+  #mobile-nav .m-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
+  #mobile-nav .m-nm {
+    text-align: center; font-size: 17px; color: #333; margin: 36px 0 0;
+    font-family: Georgia, "Times New Roman", serif;
+  }
+  #mobile-nav .m-sub { text-align: center; font-size: 10.5px; color: #999; margin: 3px 0 0; padding: 0 16px; }
+  #mobile-nav .m-menu { list-style: none; margin: 0; padding: 14px 10px; }
+  #mobile-nav .m-menu li a {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 12px; border-radius: 8px;
+    font-size: 13px; letter-spacing: .08em; font-weight: 300; color: #333;
+    transition: background .15s ease, color .15s ease;
+  }
+  #mobile-nav .m-menu li a:hover { background: #f6f6f6; color: #B0A0AA; }
+  #mobile-nav .m-menu li a svg { width: 16px; height: 16px; color: #999; flex: none; }
+  #mobile-nav .m-social {
+    margin-top: auto; display: flex; justify-content: center; gap: 14px;
+    padding: 14px 0 22px;
+  }
+  #mobile-nav .m-social a {
+    width: 24px; height: 24px; border-radius: 50%; opacity: .8;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 13px;
+  }
+  #mobile-nav .m-social a.rss { background: #ef7522; }
+  #mobile-nav .m-social a.github { background: #afb6ca; }
+  #mobile-nav .m-social a i { font-size: 13px; line-height: 1; }
+  #mobile-nav .m-social a svg { width: 13px; height: 13px; }
+  #mobile-nav .m-foot { text-align: center; font-size: 9.5px; color: #a8a8a8; margin: 0; padding: 0 0 14px; }
+}

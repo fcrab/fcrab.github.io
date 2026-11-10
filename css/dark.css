@@ -1,0 +1,294 @@
+/**
+ * dark.css —— 暗色模式覆盖层（暖炭色板）
+ *
+ * 设计稿：blog-modernization/index.html 视图③（#v3 亮暗对照表为唯一色值真源）
+ * 机制：html[data-dark] 由防闪烁内联脚本（head.ejs）与 theme.js 维护；
+ *       data-mode=auto|light|dark 三态循环，auto 时跟随系统。
+ * 主色 #4d4d4d 一字不改——暗色 hero #1f1b17 是它的衍生压深值（设计稿定稿）。
+ * 亮→暗 token：bg #fff→#2b2620；panel #fff→#332d27；hero→#1f1b17；
+ *   text #333→#ddd6cc；text-2 #696969→#b9b0a5；text-3 #999→#8d8479；
+ *   text-4 #a8a8a8→#6f675e；border #dbdbdb→#453e36；border-soft #ececec→#38322b；
+ *   link #08c→#8ab4d8；hover #B0A0AA→#c9a9bc；avatar #88acdb→#6d88a8；
+ *   rss #ef7522→#e07a35；github #afb6ca→#9aa3b8；accent→#e8c37e；
+ *   code-head #211d19→#171410；inline-code-bg #eee→#3a342d。
+ * 本文件为直写产物，source-src/css/dark.scss 为源镜像。
+ */
+
+/* ---------- 全局 ---------- */
+html[data-dark] body {
+  background: #2b2620;
+  color: #ddd6cc;
+}
+html[data-dark] .article-entry a {
+  color: #8ab4d8;
+}
+html[data-dark] .article-entry a:hover {
+  color: #c9a9bc;
+}
+html[data-dark] ::selection {
+  background: rgba(232, 195, 126, 0.25);
+}
+
+/* ---------- 侧栏（亮色几何不动，只换色） ---------- */
+html[data-dark] .left-col {
+  background: #332d27;
+}
+/* .overlay 的 #4d4d4d 是模板内联样式，暗色下压深为衍生值（主色本身不动） */
+html[data-dark] .left-col .overlay,
+html[data-dark] #mobile-nav .overlay {
+  background: #1f1b17 !important;
+}
+html[data-dark] #header {
+  border-bottom-color: #453e36;
+}
+html[data-dark] #header a {
+  color: #b9b0a5;
+}
+html[data-dark] #header a:hover {
+  color: #c9a9bc;
+}
+html[data-dark] .header-subtitle {
+  color: #8d8479;
+}
+html[data-dark] .profilepic {
+  background: #6d88a8;
+  border-color: #332d27;
+}
+/* 社交行品牌色压暗 */
+html[data-dark] .header-nav .social a.rss {
+  background: #e07a35;
+  border-color: #e07a35;
+}
+html[data-dark] .header-nav .social a.rss:hover {
+  background: #c96a2b;
+}
+html[data-dark] .header-nav .social a.github {
+  background: #9aa3b8;
+}
+html[data-dark] .header-nav .social a.github:hover {
+  background: #87919f;
+}
+
+/* ---------- 文章区 ---------- */
+html[data-dark] .article {
+  background: #332d27;
+  border-top-color: #332d27;
+  border-bottom-color: #332d27;
+  border-left-color: #453e36;
+  border-right-color: #453e36;
+}
+html[data-dark] .article-title {
+  color: #ddd6cc;
+}
+html[data-dark] .article-title:hover {
+  color: #c9a9bc;
+}
+html[data-dark] .article-meta,
+html[data-dark] .article-info,
+html[data-dark] .article-date {
+  color: #6f675e;
+}
+html[data-dark] .article-info {
+  border-top-color: #38322b;
+}
+/* 正文行内 code：浅纸底 → 暖炭底 */
+html[data-dark] .article-entry p code,
+html[data-dark] .article-entry li code {
+  background: #3a342d;
+}
+html[data-dark] .article-entry blockquote {
+  background: #332d27;
+}
+html[data-dark] .article-entry blockquote p {
+  color: #b9b0a5;
+}
+html[data-dark] .article-entry table,
+html[data-dark] .article-entry table td,
+html[data-dark] .article-entry table th {
+  border-color: #453e36;
+}
+/* 代码头栏：亮 #211d19 → 暗 #171410（代码底 #2a2622 亮暗共用，不覆盖） */
+html[data-dark] .article-entry .highlight .code-head,
+html[data-dark] .article-entry .highlight figcaption {
+  background: #171410;
+}
+/* 阅读更多按钮 */
+html[data-dark] .article-more-link {
+  background: #453e36;
+}
+/* 上一篇/下一篇 */
+html[data-dark] .article-nav-link-wrap {
+  color: #b9b0a5;
+}
+html[data-dark] .article-nav-link-wrap .article-nav-title {
+  color: #ddd6cc;
+}
+html[data-dark] .article-nav-link-wrap:hover {
+  background: rgba(232, 195, 126, 0.06);
+}
+html[data-dark] .article-nav-link-wrap:hover .article-nav-title {
+  color: #c9a9bc;
+}
+/* 打赏 / 分享等杂项边线 */
+html[data-dark] .reward-area,
+html[data-dark] .reward-button,
+html[data-dark] .share-outer {
+  border-color: #453e36;
+}
+
+/* ---------- 归档 / 标签 / 分页列表 ---------- */
+html[data-dark] .archive-post .archive-post-title,
+html[data-dark] .article-item-title {
+  color: #b9b0a5;
+}
+html[data-dark] .archive-post .archive-post-title:hover,
+html[data-dark] .article-item-title:hover {
+  color: #c9a9bc;
+}
+html[data-dark] #page-nav a,
+html[data-dark] #page-nav span {
+  color: #b9b0a5;
+}
+html[data-dark] #page-nav a:hover {
+  color: #c9a9bc;
+}
+html[data-dark] .tagcloud a {
+  border-color: #453e36;
+}
+
+/* ---------- 右下角悬浮操作（返回顶部 / toc） ---------- */
+html[data-dark] .wrap-side-operation .jump-container .icon-back,
+html[data-dark] .wrap-side-operation .toc-container .icon-font {
+  background: #453e36;
+}
+html[data-dark] .wrap-side-operation .toc-tooltip,
+html[data-dark] .wrap-side-operation .tooltip-item .tooltip {
+  background: #332d27;
+  border-color: #453e36;
+  color: #b9b0a5;
+}
+
+/* ---------- 左滑工具栏（所有文章搜索） ---------- */
+html[data-dark] .tools-col {
+  background: #332d27;
+}
+html[data-dark] .tools-col .search-ipt {
+  border-bottom-color: #b9b0a5;
+}
+html[data-dark] .tools-col .search-ul {
+  color: #b9b0a5;
+}
+html[data-dark] .tools-col .search-ul .search-li {
+  border-bottom-color: #38322b;
+}
+html[data-dark] .tools-col .search-ul .search-li:hover {
+  background: rgba(232, 195, 126, 0.08);
+}
+
+/* ---------- footer ---------- */
+html[data-dark] #footer {
+  color: #8d8479;
+  text-shadow: none;
+}
+html[data-dark] #footer a {
+  color: #8ab4d8;
+}
+
+/* ---------- 代码块横向滚动条 ---------- */
+html[data-dark] .article-entry pre::-webkit-scrollbar-thumb {
+  background: #453e36;
+}
+
+/* ---------- 移动端抽屉（dock.css 落地的 .m-* 结构） ---------- */
+html[data-dark] .m-topbar {
+  background: rgba(43, 38, 32, 0.92);
+  border-bottom-color: #38322b;
+}
+html[data-dark] .m-topbar .m-burger,
+html[data-dark] .m-topbar .m-brand,
+html[data-dark] .m-topbar .m-theme {
+  color: #ddd6cc;
+}
+html[data-dark] .m-drawer {
+  background: #332d27;
+}
+html[data-dark] .m-hero {
+  background: #1f1b17 !important;
+}
+html[data-dark] .m-avatar {
+  border-color: #332d27;
+  background: #6d88a8;
+}
+html[data-dark] .m-nm {
+  color: #ddd6cc;
+}
+html[data-dark] .m-sub {
+  color: #8d8479;
+}
+html[data-dark] .m-menu a {
+  color: #ddd6cc;
+}
+html[data-dark] .m-menu a:hover {
+  background: #2b2620;
+  color: #c9a9bc;
+}
+html[data-dark] .m-menu a svg {
+  color: #8d8479;
+}
+html[data-dark] .m-social a.github {
+  background: #9aa3b8;
+}
+html[data-dark] .m-social a.rss {
+  background: #e07a35;
+}
+html[data-dark] .m-close {
+  color: rgba(221, 214, 204, 0.85);
+}
+html[data-dark] .m-foot {
+  color: #6f675e;
+}
+html[data-dark] .m-mask {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- Dock 侧栏构件（dock.css 落地） ---------- */
+html[data-dark] .dock-handle {
+  background: #332d27;
+  border-color: #453e36;
+  color: #8d8479;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+html[data-dark] .dock-handle:hover {
+  color: #e8c37e;
+  border-color: #e8c37e;
+}
+html[data-dark] .dock-handle .tip,
+html[data-dark] .left-col .tip {
+  background: #1f1b17;
+}
+html[data-dark] .dock-handle .tip::before,
+html[data-dark] .left-col .tip::before {
+  border-right-color: #1f1b17;
+}
+html[data-dark] .left-col .dock-sub {
+  border-top-color: #38322b;
+}
+html[data-dark] .left-col .dock-theme-word,
+html[data-dark] .left-col .dock-copyright {
+  color: #6f675e;
+}
+
+/* ---------- #container.show 顶部渐变条（head 内联 style 后加载，需 !important 压制） ---------- */
+html[data-dark] #container.show {
+  background: #2b2620 !important;
+}
+
+/* ---------- 主题 slider canvas 动画（anm.js 绘制亮色渐变+粒子，暗色下隐藏） ---------- */
+html[data-dark] .anm-canvas {
+  display: none !important;
+}
+
+/* ---------- 内容区背景（.mid-col 编译值 #eaeaea，暗色压为暖炭底） ---------- */
+html[data-dark] .mid-col {
+  background: #2b2620;
+}
