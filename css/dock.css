@@ -167,8 +167,43 @@ html[data-dock="collapsed"] .left-col .header-nav .social .dock-new { top: 0; ri
 html[data-dock="collapsed"] .left-col .dock-theme-word,
 html[data-dock="collapsed"] .left-col .dock-copyright { display: none; }
 html[data-dock="collapsed"] .mid-col { left: 64px; }
-/* 次级面板（所有文章/关于我）收起态从 Dock 右侧滑出，不被 64px 侧栏压住 */
+/* 次级面板（所有文章/关于我）收起态从 Dock 右侧滑出，不被 64px 侧栏压住
+   （≤800px 移动端沿保留此规则；≥801px 桌面由下方第五波块接管） */
 html[data-dock="collapsed"] .tools-col.show { left: 64px; }
+
+/* ---------- 第五波：滑出面板接入 Dock 收缩几何 ----------
+   病根：面板/正文开合走 bounce keyframe——.tools-col.show 的 smallLeftIn
+   终点 translate3d(300px)（fill both 常驻），.mid-col.show 的 leftIn 终点
+   translate3d(333px)。transform 优先级高于 left：收缩态仅把 left 改 64px
+   会被动画终点再叠 300px，面板实际落 x≈364 压住正文；正文让位动画也按
+   展开态 300px 侧栏写死，与 64px Dock 几何错位。关闭态还有离场动画
+   （.tools-col.hide 的 smallleftOut / .mid-col.hide 的 leftOut）。
+   修法（仅桌面 ≥801px；≤800px 移动端走独立 m-drawer 抽屉，data-dock 不
+   影响其布局，本块不生效）：
+   - 收起态弃用面板/正文四条 keyframe，改 left+opacity 过渡驱动（面板
+     复用 .tools-col 基态已有 transition 思路，正文沿用上方 :114 的
+     left .25s 过渡）；
+   - 面板左缘贴 64px 图标栏右缘：开(.show)/关(.tools-col)/离场(.hide)
+     三态同 left，不再被动画拖去 300/364px；
+   - 正文让位 left 64→397px（= 64 + 展开态同款 333px 让位量）。面板内容
+     右缘 64+20+310=394 < 397，正文零遮挡，比例复刻展开态 600↔633 的
+     33px 间隙；
+   - 打开后面板左缘 64px 处与图标栏无缝衔接，dock-handle(x∈[52,76])
+     仍在上层可点。 */
+@media (min-width: 801px) {
+  html[data-dock="collapsed"] .tools-col,
+  html[data-dock="collapsed"] .tools-col.show,
+  html[data-dock="collapsed"] .tools-col.hide {
+    left: 64px;
+    -webkit-animation: none; animation: none;
+    transition: opacity .2s ease-in;
+  }
+  html[data-dock="collapsed"] .mid-col.show,
+  html[data-dock="collapsed"] .mid-col.hide {
+    -webkit-animation: none; animation: none;
+  }
+  html[data-dock="collapsed"] .mid-col.show { left: 397px; }
+}
 
 /* ---------- 隐形滑出面板放行事件（收起态滚动死区修复） ----------
    .tools-col（所有文章/关于我 的左滑面板）隐藏态原设计仅 opacity:0——盒子仍
