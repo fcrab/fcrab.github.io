@@ -47,6 +47,14 @@ html[data-dock="collapsed"] .left-col .header-menu li a:hover .tip,
 html[data-dock="collapsed"] .left-col .dock-sub a:hover .tip {
   opacity: 1; transform: translateY(-50%) translateX(0);
 }
+/* 收起态：图标行统一 64px 全宽，tooltip 统一贴行右缘外 12px（行右缘 = 64px 栏缘，
+   不再随各行旧宽度 22/32px 落进栏内） */
+html[data-dock="collapsed"] .left-col .header-menu li a .tip,
+html[data-dock="collapsed"] .left-col .dock-sub a .tip,
+html[data-dock="collapsed"] .left-col .header-nav .social a .tip,
+html[data-dock="collapsed"] .left-col .header-nav .social .s-theme .tip {
+  left: calc(100% + 12px);
+}
 
 /* ---------- 菜单图标 / 标签 / 次级图标组：默认（展开态） ---------- */
 .left-col .header-menu li a { position: relative; }
@@ -92,7 +100,9 @@ html[data-dock="collapsed"] .left-col .dock-sub a:hover .tip {
 .left-col #header { transition: height .25s cubic-bezier(.42, 0, .58, 1); }
 .mid-col { transition: left .25s cubic-bezier(.42, 0, .58, 1); }
 
-/* ---------- 收起态（Dock） ---------- */
+/* ---------- 收起态（Dock） ----------
+   垂直节奏统一：全部图标行 64×36、图标盒 18×18、行间零隙（节距恒 36px）；
+   分割线（dock-sub border-top）上下对称各 8px：菜单 margin-bottom 8 ↔ dock-sub padding-top 8 */
 html[data-dock="collapsed"] .left-col { width: 64px; }
 html[data-dock="collapsed"] .left-col .overlay { height: 52px; }
 html[data-dock="collapsed"] .left-col .intrude-less { width: 100%; margin: 20px auto 0; }
@@ -102,39 +112,45 @@ html[data-dock="collapsed"] .left-col .header-author,
 html[data-dock="collapsed"] .left-col .header-subtitle,
 html[data-dock="collapsed"] .left-col .header-smart-menu,
 html[data-dock="collapsed"] .left-col .header-menu li a .dock-label { display: none; }
-html[data-dock="collapsed"] .left-col .header-menu { min-height: 0; margin: 10px 0 4px; }
-html[data-dock="collapsed"] .left-col .header-menu li a {
-  min-width: 0; width: 64px; height: 40px; font-size: 0; color: #999;
+html[data-dock="collapsed"] .left-col #header .header-menu { min-height: 0; margin: 10px 0 8px; }
+/* ↑ 同理带 #header：基础主题 .left-col #header .header-menu{margin-left:-12px;min-height:150px}
+   会压掉无 id 的 margin/min-height 复位，造成导航整体左移 6px、图标中心 x=26 */
+html[data-dock="collapsed"] .left-col #header .header-menu li a {
+  min-width: 0; width: 64px; height: 36px; font-size: 0; color: #999;
   display: flex; align-items: center; justify-content: center;
 }
+/* ↑ 带 #header：基础主题 #header .header-menu li a{min-width:300px} 是 id 选择器，
+   无 id 覆盖会输掉 min-width/width，导致收起态行仍 300px 宽、tooltip 甩出栏外 */
 html[data-dock="collapsed"] .left-col .header-menu li a:hover { color: #B0A0AA; }
-html[data-dock="collapsed"] .left-col .header-menu .dock-ico { display: block; }
+html[data-dock="collapsed"] .left-col .header-menu .dock-ico { display: block; width: 18px; height: 18px; }
 html[data-dock="collapsed"] .left-col .dock-sub {
-  display: flex; flex-direction: column; align-items: center; gap: 4px;
-  margin: 4px 16px 0; padding: 8px 0 10px; border-top: 1px solid #ececec;
+  display: flex; flex-direction: column; align-items: center;
+  margin: 0; padding: 8px 0 0; border-top: 1px solid #ececec;
 }
 html[data-dock="collapsed"] .left-col .dock-sub a {
-  position: relative; width: 32px; height: 32px; border-radius: 8px;
+  position: relative; width: 64px; height: 36px; border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
   color: #999; transition: color .15s ease;
 }
 html[data-dock="collapsed"] .left-col .dock-sub a:hover { color: #B0A0AA; }
-html[data-dock="collapsed"] .left-col .dock-sub a svg { width: 17px; height: 17px; }
-html[data-dock="collapsed"] .left-col .header-nav .social {
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
-  margin: 12px 0 0; padding: 12px 0;
+html[data-dock="collapsed"] .left-col .dock-sub a svg { width: 18px; height: 18px; }
+html[data-dock="collapsed"] .left-col #header .header-nav .social {
+  display: flex; flex-direction: column; align-items: center;
+  margin: 0; padding: 0;
 }
-html[data-dock="collapsed"] .left-col .header-nav .social a {
-  width: 22px; height: 22px; margin: 0; background: none; border: none; opacity: 1;
+html[data-dock="collapsed"] .left-col #header .header-nav .social a {
+  width: 64px; height: 36px; margin: 0; background: none; border: none; opacity: 1;
   display: inline-flex; align-items: center; justify-content: center;
 }
-html[data-dock="collapsed"] .left-col .header-nav .social a i { font-size: 16px; line-height: 1; }
-html[data-dock="collapsed"] .left-col .header-nav .social a.rss { background: none; border: none; color: #ef7522; }
-html[data-dock="collapsed"] .left-col .header-nav .social a.github { background: none; border: none; color: #afb6ca; }
+html[data-dock="collapsed"] .left-col #header .header-nav .social a svg { width: 18px; height: 18px; }
+html[data-dock="collapsed"] .left-col #header .header-nav .social a i { font-size: 16px; line-height: 1; }
+html[data-dock="collapsed"] .left-col #header .header-nav .social a.rss { background: none; border: none; color: #ef7522; }
+html[data-dock="collapsed"] .left-col #header .header-nav .social a.github { background: none; border: none; color: #afb6ca; }
 html[data-dock="collapsed"] .left-col .header-nav .social .s-theme {
-  width: 22px; height: 22px; margin: 0; border: none; background: none; color: #999;
+  width: 64px; height: 36px; margin: 0; border: none; background: none; color: #999;
 }
-html[data-dock="collapsed"] .left-col .header-nav .social .dock-new { top: -6px; right: -14px; padding: 1px 3px; }
+html[data-dock="collapsed"] .left-col .header-nav .social .s-theme svg { width: 18px; height: 18px; }
+html[data-dock="collapsed"] .left-col .header-nav .social .dock-new { top: 0; right: 20px; padding: 1px 3px; }
 html[data-dock="collapsed"] .left-col .dock-theme-word,
 html[data-dock="collapsed"] .left-col .dock-copyright { display: none; }
 html[data-dock="collapsed"] .mid-col { left: 64px; }
