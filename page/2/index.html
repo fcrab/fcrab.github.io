@@ -176,6 +176,84 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-230626_android_1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/26/230626_android_1/">Flutter 与原生交互（以Android为例）</a>
+    </h1>
+  
+
+        
+        <a href="/2023/06/26/230626_android_1/" class="archive-article-date">
+  	<time datetime="2023-06-26T07:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>Flutter</code> 和移动端的原生代码交互主要是依赖<code>MethodChannel</code>实现.通过在其中一边定义<code>CallHandler</code>,另一边调用<code>invokeMethod</code>可以实现代码的相互调用，并获得结果</p>
+<p>以下为一个简单的例子:<br>我们新增两组channel，msgbox用于原生调用flutter代码，device用于flutter调用原生代码，需要注意的是这里的调用都是可以通过回调获取返回值的(使用<code>result.success</code>或<code>result.error</code>)，这里展示的用法是为了展示互相调用的可能性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">/**<br>    原生android代码<br> */<br>class MainActivity: FlutterActivity() &#123;<br>    //原生调用flutter的通道<br>    private val channelTag = &quot;com.united.io/msgbox&quot;<br>    //flutter调用原生的通道<br>    private val originTag = &quot;com.united.io/device&quot;<br><br>    override fun configureFlutterEngine(flutterEngine: FlutterEngine) &#123;<br>        super.configureFlutterEngine(flutterEngine)<br><br>        //注册被flutter调用的函数,一个通道可以包含多个函数,通过call.method区分<br>        val channel = <br>            MethodChannel(flutterEngine.dartExecutor.binaryMessenger,originTag)<br>        channel.setMethodCallHandler &#123; call, result -&gt;<br>            when(call.method)&#123;<br>                &quot;refresh&quot;-&gt;&#123;<br>                    Log.d(&quot;Main&quot;,&quot;call by refresh&quot;)<br>                    callByChannel()<br>                    result.success(true)<br>                &#125;<br>            &#125;<br><br>        &#125;<br>    &#125;<br><br>    private fun callByChannel()&#123;<br><br>        //调用flutter函数<br>        flutterEngine?.dartExecutor?.let &#123;<br>            val callbackChannel  = MethodChannel(it.binaryMessenger,channelTag)<br>            callbackChannel.invokeMethod(&quot;refreshMsg&quot;,true)<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2023/06/26/230626_android_1/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dev</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/26/230626_android_1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-230611_ee2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -847,84 +925,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/02/21/210221_toys_2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-210220_toys_1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/20/210220_toys_1/">20 模型收录小结 UC独角兽篇</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/20/210220_toys_1/" class="archive-article-date">
-  	<time datetime="2021-02-20T09:42:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>20年的春节前，和老婆一起去了一次商场，看到MG的深度强袭成品，DNA动了。于是抢在本期绝版前扫到了一个尾货，开启了20年重返天坑的历程。</p>
-<p>紧跟着春节而来的是这次的疫情，让大家都只能莫名地在家呆了一段时间，一夜之间仿佛玩这些的人翻番，静冈工厂是直接停工了么？，于是，新货预定，现货疯涨，成了这个天坑市场一整年的调调。</p>
-<p>虽然到21年已经对gunpla有些审美疲劳，甚至有了脱坑的想法，但该收还是会继续收的。整体的思路还是比较清晰的，接下来的日记也会以不同系列或作品做下自己的20年总结。</p>
-        
-          <a class="article-more-a" href="/2021/02/20/210220_toys_1/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">toys</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/20/210220_toys_1/">展开全文 >></a>
         </p>
       
 
